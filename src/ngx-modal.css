@@ -1,0 +1,46 @@
+.ngx-modal-popup-opened {
+  overflow: hidden;
+}
+
+.ngx-modal-popup {
+  display: none;
+}
+
+.ngx-modal-open {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ngx-modal-body {
+    outline: 0;
+    width: 50vw;
+    margin: 25vh 25vw 1em;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+}
+
+.ngx-modal-header {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.ngx-modal-button-close {
+    cursor: pointer;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+.ngx-modal-confirm-footer-toolbar {
+    text-align: right;
+    margin-right: 1em;
+}
