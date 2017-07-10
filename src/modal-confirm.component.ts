@@ -15,9 +15,9 @@ import { Observable } from 'rxjs/Observable';
     </modal-content>
     <modal-footer>
         <div [class]="options.confirmFooterToolbarClass">
-            <button id="modal-confirm-ok" type="button" [class]="options.confirmOkayButtonClass"
+            <button role="ok" type="button" [class]="options.confirmOkayButtonClass"
                 (click)="ok()">{{okayLabel}}</button>
-            <button id="modal-confirm-cancel" type="button" [class]="options.confirmOkayButtonClass"
+            <button role="cancel" type="button" [class]="options.confirmOkayButtonClass"
                 (click)="cancel()" #confirmCancel>{{cancelLabel}}</button>
         </div>
     </modal-footer>

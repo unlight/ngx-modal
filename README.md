@@ -170,6 +170,7 @@ Selector: `modal-content`
 
 CHANGELOG
 ---
+* 4.3.0: added type to buttons
 * 4.2.0: added license
 * 4.1.0: introduced `routed` input property
 * 4.0.0: fixed aot

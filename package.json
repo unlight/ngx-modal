@@ -1,6 +1,6 @@
 {
   "name": "@epam/ngx-modal",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "Open modal window for your Angular X application",
   "scripts": {
     "start": "webpack-dev-server --hot --progress --colors",
