@@ -1,5 +1,5 @@
 {
-  "name": "@epam/ngx-modal",
+  "name": "ngx-modal2",
   "version": "4.3.0",
   "description": "Open modal window for your Angular X application",
   "scripts": {
