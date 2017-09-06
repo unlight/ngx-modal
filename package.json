@@ -16,7 +16,7 @@
     "lint": "npm run eslint -- src --ext .ts && npm run tsc -- --noEmit --noUnusedLocals",
     "eslint": "eslint",
     "np": "cd package && npm publish",
-    "package": "npm run test && npm run lint && npm run build && npm run np"
+    "release": "npm run test && npm run lint && npm run build && npm run np"
   },
   "keywords": [
     "modal",
