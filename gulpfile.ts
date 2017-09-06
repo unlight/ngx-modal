@@ -22,7 +22,7 @@ gulp.task('copy_typings', ['rename_pkg'], () => {
 });
 
 gulp.task('copy_others', () => {
-    return gulp.src(['src/*.css', 'README.md', 'LICENSE'])
+    return gulp.src(['src/*.css', 'README.md', 'LICENSE', '.npmrc', '.npmignore'])
         .pipe(gulp.dest(destPath));
 });
 
