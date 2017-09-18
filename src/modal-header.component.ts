@@ -5,6 +5,7 @@ import { ModalOptions, OPTIONS } from './modal-library';
     selector: 'modal-header',
     template: `<header [class]="options.headerClass">
         <button *ngIf="hasCloseButton" type="button" (click)="closeEventEmitter.next($event)"
+            data-dismiss="modal"
             [class]="options.buttonCloseClass"
             [innerHTML]="options.buttonCloseContent"></button>
         <h1 *ngIf="title">{{title}}</h1>
