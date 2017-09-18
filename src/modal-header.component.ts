@@ -7,7 +7,7 @@ import { ModalOptions, OPTIONS } from './modal-library';
         <button *ngIf="hasCloseButton" type="button" (click)="closeEventEmitter.next($event)"
             [class]="options.buttonCloseClass"
             [innerHTML]="options.buttonCloseContent"></button>
-        <h1>{{title}}</h1>
+        <h1 *ngIf="title">{{title}}</h1>
         <ng-content></ng-content>
     </header>`
 })

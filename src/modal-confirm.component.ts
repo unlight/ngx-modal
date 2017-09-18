@@ -9,7 +9,9 @@ import { Observable } from 'rxjs/Observable';
 @Component({
     selector: 'modal-confirm',
     template: `<modal (onOpen)="onOpen()" [routed]="false">
-    <modal-header [title]="title" [hasCloseButton]="false"></modal-header>
+    <modal-header [title]="title" [hasCloseButton]="false">
+        <ng-content select="header"></ng-content>
+    </modal-header>
     <modal-content>
         <div [innerHTML]="content"></div>
     </modal-content>
