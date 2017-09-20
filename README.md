@@ -122,6 +122,8 @@ Inputs:
 * `routed: boolean` Set flag indicating that modal is routed
 * `isOpen: boolean` Open modal when component initialized
 * `isNotification: boolean`
+* `settings: Partial<ModalOptions>` Custom settings for modal,
+  supported settings: routeOnClose, routeOutlets, backOnClose, isOpenClass, isNotificationClass, popupOpenedClass
 
 Outputs:
 * `onClose: EventEmitter<any>`
@@ -170,6 +172,7 @@ Selector: `modal-content`
 
 CHANGELOG
 ---
+* 4.5.0: added input settings for modal component
 * 4.3.0: added type to buttons
 * 4.2.0: added license
 * 4.1.0: introduced `routed` input property

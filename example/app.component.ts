@@ -13,6 +13,7 @@ require('../src/ngx-modal.css');
     <a (click)="openConfirm()">Confirm</a> |
     <a routerLink="/feature">Go to Feature Module (lazy loaded)</a> |
     <a routerLink="/feature/123">parameter-comp</a> |
+    <a routerLink="/custom_modal">custom_modal</a> |
     <hr/>
     <router-outlet></router-outlet>
     <hr/>

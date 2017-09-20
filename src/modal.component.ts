@@ -20,22 +20,26 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() routed: boolean;
     @Input() isOpen: boolean;
     @Input() isNotification: boolean;
+    @Input() settings: Partial<ModalOptions>;
     @Output() onClose: EventEmitter<any> = new EventEmitter();
     @Output() onOpen: EventEmitter<any> = new EventEmitter();
     @ViewChild('body') protected body: ElementRef;
     @ContentChild(ModalHeaderComponent) protected header: ModalHeaderComponent;
+    options: ModalOptions;
     protected closeSubscription: Subscription;
 
     constructor(
-        @Inject(OPTIONS) public readonly options: ModalOptions,
+        @Inject(OPTIONS) modalOptions: ModalOptions,
         protected renderer: Renderer2,
         protected location: Location,
         protected router: Router,
         protected activatedRoute: ActivatedRoute,
     ) {
+        this.options = modalOptions;
     }
 
     ngOnInit() {
+        this.options = { ...this.options, ...this.settings };
         if (this.isOpen) {
             this.open();
         }
