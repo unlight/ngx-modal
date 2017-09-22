@@ -100,7 +100,7 @@ describe('ModalComponent:', () => {
             let router: Router = TestBed.get(Router);
             const navigate = spyOn(router, 'navigate');
             component.close();
-            expect(router.navigate).toHaveBeenCalledWith(['.', { outlets: { modal: null } }], { relativeTo: mockActivatedRoute.parent });
+            expect(router.navigate).toHaveBeenCalledWith(['.', { outlets: { modal: null } }], { });
         });
 
     });
