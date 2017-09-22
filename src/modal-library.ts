@@ -50,6 +50,10 @@ export const defaultOptions = {
     confirmFooterToolbarClass: 'ngx-modal-confirm-footer-toolbar',
     confirmOkayButtonClass: '',
     confirmCancelButtonClass: '',
+    /**
+     * When true, when modal closes router.navigate() will be called with options relativeTo: activatedRoute.parent
+     */
+    closeRelativeToParent: false,
 };
 
 export type ModalOptions = typeof defaultOptions;

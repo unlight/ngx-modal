@@ -53,7 +53,11 @@ export class ModalComponent implements OnDestroy, OnInit {
             if (this.options.routeOnClose) {
                 if (this.isAuxRoute() && Array.isArray(this.options.routeOutlets)) {
                     const outlets = this.options.routeOutlets.reduce((acc, outlet) => (acc[outlet] = null, acc), {});
-                    this.router.navigate(['.', { outlets }], { relativeTo: this.activatedRoute.parent });
+                    const navigateOptions: any = { };
+                    if (this.options.closeRelativeToParent) {
+                        navigateOptions.relativeTo = this.activatedRoute.parent;
+                    }
+                    this.router.navigate(['.', { outlets }], navigateOptions);
                 } else {
                     this.router.navigate(['.'], { relativeTo: this.activatedRoute.parent });
                 }

@@ -105,6 +105,10 @@ export const defaultOptions: ModalOptions = {
     confirmFooterToolbarClass: 'ngx-modal-confirm-footer-toolbar',
     confirmOkayButtonClass: '',
     confirmCancelButtonClass: '',
+    /**
+     * When true, when modal closes router.navigate() will be called with options relativeTo: activatedRoute.parent
+     */
+    closeRelativeToParent: false,
 };
 ```
 
@@ -172,6 +176,7 @@ Selector: `modal-content`
 
 CHANGELOG
 ---
+* 4.6.1: new option closeRelativeToParent
 * 4.6.0: Fixed detection of aux route
 * 4.5.0: added input settings for modal component
 * 4.3.0: added type to buttons
