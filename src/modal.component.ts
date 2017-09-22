@@ -88,7 +88,16 @@ export class ModalComponent implements OnDestroy, OnInit {
     }
 
     protected isAuxRoute() {
-        return this.activatedRoute.outlet !== PRIMARY_OUTLET;
+        let result: boolean = false;
+        let route: ActivatedRoute = this.activatedRoute;
+        result = route.outlet !== PRIMARY_OUTLET;
+        do {
+            result = route.outlet !== PRIMARY_OUTLET;
+            if (result) {
+                break;
+            }
+        } while (route = route.parent as ActivatedRoute);
+        return result;
     }
 
     open(event?: any) {

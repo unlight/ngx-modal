@@ -4,6 +4,7 @@ import { Component, ViewChild, DebugElement } from '@angular/core';
 import { ModalComponent } from './modal.component';
 import { ModalModule } from './modal.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, PRIMARY_OUTLET } from '@angular/router';
 
 describe('ModalComponent:', () => {
 
@@ -21,6 +22,8 @@ describe('ModalComponent:', () => {
                 declarations: [
                 ],
                 schemas: [],
+                providers: [
+                ],
             })
             .compileComponents()
             .then(() => {
@@ -50,6 +53,56 @@ describe('ModalComponent:', () => {
         e.initKeyboardEvent('keydown', true, true, window, 'Tab', e.location, '', e.repeat, e.locale);
         document.dispatchEvent(e);
         expect(component.keyDownHandler).toHaveBeenCalled();
+    });
+
+
+    describe('route aux related', () => {
+
+        let navigate: jasmine.Spy;
+        let mockActivatedRoute = {
+            snapshot: {
+                data: {},
+            },
+            outlet: PRIMARY_OUTLET,
+            parent: {
+                outlet: 'AUX',
+                parent: {
+                    outlet: PRIMARY_OUTLET,
+                    parent: null,
+                },
+            }
+        };
+
+        beforeEach(async(() => {
+            TestBed.resetTestingModule();
+            TestBed
+                .configureTestingModule({
+                    imports: [
+                        RouterTestingModule,
+                        ModalModule
+                    ],
+                    declarations: [
+                    ],
+                    schemas: [],
+                    providers: [
+                        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+                    ],
+                })
+                .compileComponents()
+                .then(() => {
+                    fixture = TestBed.createComponent(ModalComponent);
+                    component = fixture.componentInstance;
+                    de = fixture.debugElement;
+                });
+        }));
+
+        it('aux route checks parents', () => {
+            let router: Router = TestBed.get(Router);
+            const navigate = spyOn(router, 'navigate');
+            component.close();
+            expect(router.navigate).toHaveBeenCalledWith(['.', { outlets: { modal: null } }], { relativeTo: mockActivatedRoute.parent });
+        });
+
     });
 
 });
