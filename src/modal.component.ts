@@ -96,7 +96,8 @@ export class ModalComponent implements OnDestroy, OnInit {
             if (result) {
                 break;
             }
-        } while (route = route.parent as ActivatedRoute);
+            route = route.parent as ActivatedRoute;
+        } while (route);
         return result;
     }
 
