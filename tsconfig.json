@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "declaration": false,
+    "pretty": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "suppressExcessPropertyErrors": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "isolatedModules": false,
+    "outDir": "lib",
+    "lib": [
+      "es7",
+      "dom"
+    ]
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,5 @@
+/node_modules/
+~*
+/package/
+/package-lock.json
+/.ng_build/
