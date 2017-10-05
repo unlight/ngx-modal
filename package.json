@@ -9,7 +9,7 @@
     "gulp": "gulp",
     "karma": "karma start",
     "t": "npm run karma -- --single-run",
-    "test": "npm run t",
+    "test": "npm run lint && npm run t",
     "test:w": "npm run karma",
     "build": "ng-packagr -p ng-package.json",
     "postbuild": "npm run gulp -- postbuild",
@@ -17,7 +17,7 @@
     "lint": "npm run eslint -- src --ext .ts && npm run tsc -- --noEmit --noUnusedLocals",
     "eslint": "eslint",
     "np": "cd package && npm publish",
-    "release": "npm run test && npm run lint && npm run build && npm run np"
+    "release": "npm run build && npm run np"
   },
   "keywords": [
     "modal",
