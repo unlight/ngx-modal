@@ -176,6 +176,7 @@ Selector: `modal-content`
 
 CHANGELOG
 ---
+* 4.6.2: Fixed class names for modal confirm component
 * 4.6.1: new option closeRelativeToParent
 * 4.6.0: Fixed detection of aux route
 * 4.5.0: added input settings for modal component

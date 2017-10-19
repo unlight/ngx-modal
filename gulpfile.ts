@@ -4,13 +4,19 @@ import * as Path from 'path';
 const gulp = require('gulp');
 const readPkgUp = require('read-pkg-up');
 import del = require('del');
-const { name: pkgName, version } = readPkgUp.sync().pkg;
+const { name: pkgName, version, publishConfig } = readPkgUp.sync().pkg;
 const g = require('gulp-load-plugins')();
 const destPath = Path.join(__dirname, 'package');
 
 gulp.task('rename_pkg', done => {
     let pkg = JSON.parse(fs.readFileSync(`${destPath}/package.json`, 'utf8'));
-    pkg = { ...pkg, name: pkgName, version, typings: 'src/index.ts' };
+    pkg = {
+        ...pkg,
+        name: pkgName,
+        version,
+        publishConfig,
+        typings: 'src/index.ts'
+    };
     fs.writeFileSync(`${destPath}/package.json`, JSON.stringify(pkg, null, 2));
     done();
 });
