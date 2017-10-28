@@ -144,6 +144,8 @@ Selector: `modal-confirm`
 Inputs:
 * `title: string`
 * `content: string`
+* `isNotification: boolean` If true add notification class popup
+* `settings: Partial<ModalOptions>`
 * `okayLabel: string = 'Okay'` Okay button label
 * `cancelLabel: string = 'Cancel'`
 
@@ -176,6 +178,7 @@ Selector: `modal-content`
 
 CHANGELOG
 ---
+* 4.6.3: Pass settings from modal-confirm to modal component
 * 4.6.2: Fixed class names for modal confirm component
 * 4.6.1: new option closeRelativeToParent
 * 4.6.0: Fixed detection of aux route
