@@ -3,3 +3,4 @@
 /package/
 /package-lock.json
 /.ng_build/
+*.log.*

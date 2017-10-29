@@ -21,6 +21,8 @@ require('../src/ngx-modal.css');
         title="Confirmation"
         okayLabel="OK"
         cancelLabel="CANCEL"
+        [isNotification]="true"
+        [settings]="{bodyClass:'ngx-modal-body ngx-modal-body2'}"
         content="Are you are sure?"></modal-confirm>
 <router-outlet name="modal"></router-outlet>
 <router-outlet name="lazy_modal"></router-outlet>

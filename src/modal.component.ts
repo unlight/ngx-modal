@@ -23,17 +23,17 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() settings: Partial<ModalOptions>;
     @Output() onClose: EventEmitter<any> = new EventEmitter();
     @Output() onOpen: EventEmitter<any> = new EventEmitter();
-    @ViewChild('body') protected body: ElementRef;
-    @ContentChild(ModalHeaderComponent) protected header: ModalHeaderComponent;
+    @ViewChild('body') private body: ElementRef;
+    @ContentChild(ModalHeaderComponent) private header: ModalHeaderComponent;
     options: ModalOptions;
-    protected closeSubscription: Subscription;
+    private closeSubscription: Subscription;
 
     constructor(
         @Inject(OPTIONS) modalOptions: ModalOptions,
-        protected renderer: Renderer2,
-        protected location: Location,
-        protected router: Router,
-        protected activatedRoute: ActivatedRoute,
+        private renderer: Renderer2,
+        private location: Location,
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
     ) {
         this.options = modalOptions;
     }
@@ -67,7 +67,7 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    protected isRouteModal() {
+    private isRouteModal() {
         if (typeof this.routed === 'boolean') {
             return this.routed;
         }
@@ -91,7 +91,7 @@ export class ModalComponent implements OnDestroy, OnInit {
         return result;
     }
 
-    protected isAuxRoute() {
+    private isAuxRoute() {
         let result: boolean = false;
         let route: ActivatedRoute = this.activatedRoute;
         result = route.outlet !== PRIMARY_OUTLET;
@@ -135,7 +135,7 @@ export class ModalComponent implements OnDestroy, OnInit {
         };
     }
 
-    protected onTabKeyDown(e: KeyboardEvent) {
+    private onTabKeyDown(e: KeyboardEvent) {
         if (!this.isOpen) {
             return;
         }
@@ -157,7 +157,7 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    protected doOnOpen() {
+    private doOnOpen() {
         if (this.header) {
             this.closeSubscription = this.header.closeEventEmitter.subscribe((e: Event) => {
                 this.close(e);
@@ -170,7 +170,7 @@ export class ModalComponent implements OnDestroy, OnInit {
         this.preventBackgroundScrolling();
     }
 
-    protected cleanUp() {
+    private cleanUp() {
         if (this.isOpen) {
             this.enableBackgroundScrolling();
         }
@@ -179,15 +179,15 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    protected enableBackgroundScrolling() {
+    private enableBackgroundScrolling() {
         this.backgroundScrolling(true);
     }
 
-    protected preventBackgroundScrolling() {
+    private preventBackgroundScrolling() {
         this.backgroundScrolling(false);
     }
 
-    protected backgroundScrolling(value: boolean) {
+    private backgroundScrolling(value: boolean) {
         const body = document.querySelector('body');
         if (body) {
             const method = (value) ? 'removeClass' : 'addClass';
