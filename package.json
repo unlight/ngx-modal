@@ -17,7 +17,7 @@
     "lint": "npm run eslint && npm run tsc -- --noEmit --noUnusedLocals",
     "eslint": "eslint src --ext ts",
     "np": "cd package && npm publish",
-    "prerelease": "npm install",
+    "prerelease": "npm rebuild node-sass",
     "release": "npm run build && npm run np"
   },
   "keywords": [
