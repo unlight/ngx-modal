@@ -11,13 +11,13 @@
     "t": "npm run karma -- --single-run",
     "test": "npm run lint && npm run t",
     "test:w": "npm run karma",
-    "prepare": "npm install",
     "build": "ng-packagr -p ng-package.json",
     "postbuild": "npm run gulp -- postbuild",
     "tsc": "tsc",
     "lint": "npm run eslint && npm run tsc -- --noEmit --noUnusedLocals",
     "eslint": "eslint src --ext ts",
     "np": "cd package && npm publish",
+    "prerelease": "npm install",
     "release": "npm run build && npm run np"
   },
   "keywords": [
