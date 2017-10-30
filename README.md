@@ -195,8 +195,7 @@ Selector: `modal-content`
 
 CHANGELOG
 ---
-* 4.6.5: Removed MODAL_OPTIONS_COMPONENT token
-* 4.6.4: Introduced modal-confirm2 component
+* 4.6.6: Introduced modal-confirm2 component
 * 4.6.3: Pass settings from modal-confirm to modal component
 * 4.6.2: Fixed class names for modal confirm component
 * 4.6.1: new option closeRelativeToParent
