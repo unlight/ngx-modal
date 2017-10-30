@@ -1,11 +1,5 @@
-import { Component, ViewChild, Input, ElementRef, Inject, OnInit } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/take';
-import { ModalComponent } from './modal.component';
+import { Component } from '@angular/core';
 import { ModalConfirmComponent } from './modal-confirm.component';
-import { ModalOptions, OPTIONS } from './modal-library';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'modal-confirm2',
