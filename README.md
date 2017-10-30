@@ -195,6 +195,7 @@ Selector: `modal-content`
 
 CHANGELOG
 ---
+* 4.6.5: Allow override settings per component (MODAL_COMPONENT_OPTIONS token)
 * 4.6.4: Introduced modal-confirm2 component
 * 4.6.3: Pass settings from modal-confirm to modal component
 * 4.6.2: Fixed class names for modal confirm component
