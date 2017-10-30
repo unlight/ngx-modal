@@ -4,7 +4,7 @@ import { ModalComponent } from './modal.component';
 import { ModalContentComponent } from './modal-content.component';
 import { ModalFooterComponent } from './modal-footer.component';
 import { ModalHeaderComponent } from './modal-header.component';
-import { ModalOptions, defaultOptions, OPTIONS, MODAL_OPTIONS_COMPONENT } from './modal-library';
+import { ModalOptions, defaultOptions, OPTIONS } from './modal-library';
 import { ModalConfirmComponent } from './modal-confirm.component';
 import { ModalConfirm2Component } from './modal-confirm2.component';
 
@@ -31,7 +31,6 @@ import { ModalConfirm2Component } from './modal-confirm2.component';
     providers: [
         { provide: 'MODAL_OPTIONS_DEFAULT', useValue: defaultOptions },
         { provide: 'MODAL_OPTIONS_ROOT', useValue: defaultOptions },
-        { provide: MODAL_OPTIONS_COMPONENT, useValue: {} },
         { provide: OPTIONS, useValue: defaultOptions },
     ]
 })
@@ -42,7 +41,7 @@ export class ModalModule {
             ngModule: ModalModule,
             providers: [
                 { provide: 'MODAL_OPTIONS_ROOT', useValue: options },
-                { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_OPTIONS_DEFAULT', 'MODAL_OPTIONS_ROOT', MODAL_OPTIONS_COMPONENT] },
+                { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_OPTIONS_DEFAULT', 'MODAL_OPTIONS_ROOT'] },
             ]
         };
     }
@@ -52,7 +51,7 @@ export class ModalModule {
             ngModule: ModalModule,
             providers: [
                 { provide: 'MODAL_CHILD_OPTIONS', useValue: options },
-                { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_OPTIONS_DEFAULT', 'MODAL_OPTIONS_ROOT', 'MODAL_CHILD_OPTIONS', MODAL_OPTIONS_COMPONENT] },
+                { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_OPTIONS_DEFAULT', 'MODAL_OPTIONS_ROOT', 'MODAL_CHILD_OPTIONS'] },
             ]
         };
     }

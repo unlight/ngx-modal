@@ -63,7 +63,6 @@ export const defaultOptions = {
 export type ModalOptions = typeof defaultOptions;
 
 export const OPTIONS = new InjectionToken<ModalOptions>('ModalOptions');
-export const MODAL_OPTIONS_COMPONENT = new InjectionToken<ModalOptions>('MODAL_COMPONENT_OPTIONS');
 
 export function createFocusManager(container: HTMLElement, newTarget: Node) {
     const elements = Array.from<HTMLElement>(container.querySelectorAll(focusableSelector) as any);
