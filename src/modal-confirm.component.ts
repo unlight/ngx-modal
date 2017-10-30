@@ -62,7 +62,7 @@ export class ModalConfirmComponent implements OnInit {
             .take(1);
     }
 
-    private close() {
+    close() {
         if (this.modal) {
             this.modal.close();
         }
