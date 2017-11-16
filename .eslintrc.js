@@ -14,6 +14,26 @@ const tslintRules = Object.assign({}, tslintRulesRecommended, {
     "no-var-requires": false,
     "semicolon": false,
     "no-unused-expression": [false, "allow-fast-null-checks"],
+    // codelyzer:
+    "angular-whitespace": [true, "check-interpolation", "check-pipe"],
+    "banana-in-box": true,
+    "templates-no-negated-async": true,
+    "directive-selector": [true, "attribute", "ng", "camelCase"],
+    "component-selector": [true, "element", "ng", "kebab-case"],
+    "use-input-property-decorator": true,
+    "use-output-property-decorator": true,
+    "use-host-property-decorator": true,
+    "no-attribute-parameter-decorator": true,
+    "no-input-rename": true,
+    "no-output-rename": true,
+    "no-forward-ref": true,
+    "use-view-encapsulation": true,
+    "use-life-cycle-interface": true,
+    "use-pipe-transform-interface": true,
+    "pipe-naming": [true, "camelCase", "sg"],
+    "component-class-suffix": true,
+    "directive-class-suffix": true,
+    "pipe-impure": true,
 });
 
 module.exports = {
@@ -48,7 +68,10 @@ module.exports = {
     "rules": {
         "tslint/config": [1, {
             rules: tslintRules,
-            rulesDirectory: ["node_modules/tslint/lib/rules"],
+            rulesDirectory: [
+                "node_modules/tslint/lib/rules",
+                "node_modules/codelyzer",
+            ],
         }],
         "no-undef": 0,
         "no-unused-vars": 0,

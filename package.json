@@ -50,6 +50,7 @@
     "@types/node": "8.0.53",
     "angular-router-loader": "0.7.0",
     "awesome-typescript-loader": "3.3.0",
+    "codelyzer": "4.0.1",
     "core-js": "2.5.1",
     "css-loader": "0.28.7",
     "css-to-string-loader": "0.1.3",
