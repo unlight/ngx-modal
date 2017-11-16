@@ -23,7 +23,7 @@ import { Observable } from 'rxjs/Observable';
                 (click)="cancel()" #confirmCancel>{{cancelLabel}}</button>
         </div>
     </modal-footer>
-</modal>`
+</modal>`,
 })
 export class ModalConfirmComponent implements OnInit {
 

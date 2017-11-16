@@ -10,7 +10,7 @@ import { ModalOptions, OPTIONS } from './modal-library';
             [innerHTML]="options.buttonCloseContent"></button>
         <h1 *ngIf="title">{{title}}</h1>
         <ng-content></ng-content>
-    </header>`
+    </header>`,
 })
 export class ModalHeaderComponent {
 

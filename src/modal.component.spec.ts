@@ -1,4 +1,3 @@
-/// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { ModalComponent } from './modal.component';
@@ -17,7 +16,7 @@ describe('ModalComponent:', () => {
             .configureTestingModule({
                 imports: [
                     RouterTestingModule,
-                    ModalModule
+                    ModalModule,
                 ],
                 declarations: [
                 ],
@@ -44,6 +43,7 @@ describe('ModalComponent:', () => {
 
     it('open method should set isOpen', () => {
         component.open();
+
         expect(component.isOpen).toBe(true);
     });
 
@@ -52,14 +52,13 @@ describe('ModalComponent:', () => {
         const e = document.createEvent('KeyboardEvent');
         e.initKeyboardEvent('keydown', true, true, window, 'Tab', e.location, '', e.repeat, e.locale);
         document.dispatchEvent(e);
-        expect(component.keyDownHandler).toHaveBeenCalled();
+        expect(component.keyDownHandler).toHaveBeenCalled(); // eslint-disable-line jasmine/prefer-toHaveBeenCalledWith
     });
-
 
     describe('route aux related', () => {
 
         let navigate: jasmine.Spy;
-        let mockActivatedRoute = {
+        const mockActivatedRoute = {
             snapshot: {
                 data: {},
             },
@@ -70,7 +69,7 @@ describe('ModalComponent:', () => {
                     outlet: PRIMARY_OUTLET,
                     parent: null,
                 },
-            }
+            },
         };
 
         beforeEach(async(() => {
@@ -79,11 +78,8 @@ describe('ModalComponent:', () => {
                 .configureTestingModule({
                     imports: [
                         RouterTestingModule,
-                        ModalModule
+                        ModalModule,
                     ],
-                    declarations: [
-                    ],
-                    schemas: [],
                     providers: [
                         { provide: ActivatedRoute, useValue: mockActivatedRoute },
                     ],
@@ -97,9 +93,10 @@ describe('ModalComponent:', () => {
         }));
 
         it('aux route checks parents', () => {
-            let router: Router = TestBed.get(Router);
+            const router: Router = TestBed.get(Router);
             const navigate = spyOn(router, 'navigate');
             component.close();
+
             expect(router.navigate).toHaveBeenCalledWith(['.', { outlets: { modal: null } }], { });
         });
 

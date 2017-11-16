@@ -32,7 +32,7 @@ import { ModalConfirm2Component } from './modal-confirm2.component';
         { provide: 'MODAL_OPTIONS_DEFAULT', useValue: defaultOptions },
         { provide: 'MODAL_OPTIONS_ROOT', useValue: defaultOptions },
         { provide: OPTIONS, useValue: defaultOptions },
-    ]
+    ],
 })
 export class ModalModule {
 
@@ -42,7 +42,7 @@ export class ModalModule {
             providers: [
                 { provide: 'MODAL_OPTIONS_ROOT', useValue: options },
                 { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_OPTIONS_DEFAULT', 'MODAL_OPTIONS_ROOT'] },
-            ]
+            ],
         };
     }
 
@@ -52,7 +52,7 @@ export class ModalModule {
             providers: [
                 { provide: 'MODAL_CHILD_OPTIONS', useValue: options },
                 { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_OPTIONS_DEFAULT', 'MODAL_OPTIONS_ROOT', 'MODAL_CHILD_OPTIONS'] },
-            ]
+            ],
         };
     }
 }

@@ -16,7 +16,7 @@ import { ModalConfirmComponent } from './modal-confirm.component';
             </div>
         </div>
     </modal-content>
-</modal>`
+</modal>`,
 })
 export class ModalConfirm2Component extends ModalConfirmComponent {
 }

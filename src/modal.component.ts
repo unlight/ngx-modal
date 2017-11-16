@@ -13,7 +13,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
             <section [class]="options.bodyClass" tabindex="0" #body>
                 <ng-content></ng-content>
             </section>
-        </div>`
+        </div>`,
 })
 export class ModalComponent implements OnDestroy, OnInit {
 
@@ -23,9 +23,9 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() settings: Partial<ModalOptions>;
     @Output() onClose: EventEmitter<any> = new EventEmitter();
     @Output() onOpen: EventEmitter<any> = new EventEmitter();
+    options: ModalOptions;
     @ViewChild('body') private body: ElementRef;
     @ContentChild(ModalHeaderComponent) private header: ModalHeaderComponent;
-    options: ModalOptions;
     private closeSubscription: Subscription;
 
     constructor(
@@ -67,44 +67,6 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    private isRouteModal() {
-        if (typeof this.routed === 'boolean') {
-            return this.routed;
-        }
-        if (this.activatedRoute.snapshot.data.routed) {
-            return true;
-        }
-        if (this.isAuxRoute()) {
-            return true;
-        }
-        let result = false;
-        const urlSegments = (this.activatedRoute.url as BehaviorSubject<UrlSegment[]>).value;
-        if (urlSegments.length === 1) {
-            const activatedUrlSegment = String(urlSegments[0]);
-            const routeConfig = this.activatedRoute.parent && this.activatedRoute.parent.routeConfig;
-            if (routeConfig && routeConfig.children && activatedUrlSegment) {
-                result = routeConfig.children
-                    .map(x => x.path)
-                    .indexOf(activatedUrlSegment) !== -1;
-            }
-        }
-        return result;
-    }
-
-    private isAuxRoute() {
-        let result: boolean = false;
-        let route: ActivatedRoute = this.activatedRoute;
-        result = route.outlet !== PRIMARY_OUTLET;
-        do {
-            result = route.outlet !== PRIMARY_OUTLET;
-            if (result) {
-                break;
-            }
-            route = route.parent as ActivatedRoute;
-        } while (route);
-        return result;
-    }
-
     open(event?: any) {
         this.onOpen.emit(event);
         this.isOpen = true;
@@ -117,7 +79,7 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     @HostListener('document:keydown', ['$event'])
     keyDownHandler(e: KeyboardEvent) {
-        switch (e.key) {
+        switch (e.key) { // eslint-disable-line tslint/config
             case 'Esc':
             case 'Escape':
                 this.close(e);
@@ -193,5 +155,43 @@ export class ModalComponent implements OnDestroy, OnInit {
             const method = (value) ? 'removeClass' : 'addClass';
             this.renderer[method](body, this.options.popupOpenedClass);
         }
+    }
+
+    private isRouteModal() {
+        if (typeof this.routed === 'boolean') {
+            return this.routed;
+        }
+        if (this.activatedRoute.snapshot.data.routed) {
+            return true;
+        }
+        if (this.isAuxRoute()) {
+            return true;
+        }
+        let result = false;
+        const urlSegments = (this.activatedRoute.url as BehaviorSubject<UrlSegment[]>).value;
+        if (urlSegments.length === 1) {
+            const activatedUrlSegment = String(urlSegments[0]);
+            const routeConfig = this.activatedRoute.parent && this.activatedRoute.parent.routeConfig;
+            if (routeConfig && routeConfig.children && activatedUrlSegment) {
+                result = routeConfig.children
+                    .map(x => x.path)
+                    .indexOf(activatedUrlSegment) !== -1;
+            }
+        }
+        return result;
+    }
+
+    private isAuxRoute() {
+        let result: boolean = false;
+        let route: ActivatedRoute = this.activatedRoute;
+        result = route.outlet !== PRIMARY_OUTLET;
+        do {
+            result = route.outlet !== PRIMARY_OUTLET;
+            if (result) {
+                break;
+            }
+            route = route.parent as ActivatedRoute;
+        } while (route);
+        return result;
     }
 }
