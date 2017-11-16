@@ -1,3 +1,41 @@
+const tslintRulesRecommended = require('tslint/lib/configs/recommended').rules;
+const tslintRules = Object.assign({}, tslintRulesRecommended, {
+    "member-access": false,
+    "ordered-imports": false,
+    "quotemark": false,
+    "no-var-keyword": false,
+    "object-literal-sort-keys": false,
+    "no-console": false,
+    "arrow-parens": false,
+    "max-line-length": false,
+    "object-literal-key-quotes": false,
+    "no-shadowed-variable": false,
+    "only-arrow-functions": false,
+    "no-var-requires": false,
+    "semicolon": false,
+    "no-unused-expression": [false, "allow-fast-null-checks"],
+    // codelyzer:
+    "angular-whitespace": [true, "check-interpolation", "check-pipe"],
+    "banana-in-box": true,
+    "templates-no-negated-async": true,
+    "directive-selector": [true, "attribute", "ng", "camelCase"],
+    "component-selector": [true, "element", "ng", "kebab-case"],
+    "use-input-property-decorator": true,
+    "use-output-property-decorator": true,
+    "use-host-property-decorator": true,
+    "no-attribute-parameter-decorator": true,
+    "no-input-rename": true,
+    "no-output-rename": true,
+    "no-forward-ref": true,
+    "use-view-encapsulation": true,
+    "use-life-cycle-interface": true,
+    "use-pipe-transform-interface": true,
+    "pipe-naming": [true, "camelCase", "sg"],
+    "component-class-suffix": true,
+    "directive-class-suffix": true,
+    "pipe-impure": true,
+});
+
 module.exports = {
     "env": {
         "browser": true,
@@ -25,8 +63,16 @@ module.exports = {
         "wix-editor",
         "jasmine",
         "import",
+        "tslint",
     ],
     "rules": {
+        "tslint/config": [1, {
+            rules: tslintRules,
+            rulesDirectory: [
+                "node_modules/tslint/lib/rules",
+                "node_modules/codelyzer",
+            ],
+        }],
         "no-undef": 0,
         "no-unused-vars": 0,
         "no-empty-function": 0,
@@ -52,6 +98,7 @@ module.exports = {
         "wix-editor/return-boolean": 1,
         "wix-editor/simplify-boolean-expression": 1,
         "jasmine/no-focused-tests": 1,
+        "jasmine/new-line-before-expect": 0,
         "perf-standard/no-instanceof-guard": 2,
         "perf-standard/no-self-in-constructor": 2,
         "perf-standard/check-function-inline": 1,
@@ -102,6 +149,5 @@ module.exports = {
         "no-trailing-spaces": 1,
         "no-confusing-arrow": 2,
         "prefer-const": 1,
-
     }
 };

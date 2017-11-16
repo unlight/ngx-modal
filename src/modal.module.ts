@@ -6,6 +6,7 @@ import { ModalFooterComponent } from './modal-footer.component';
 import { ModalHeaderComponent } from './modal-header.component';
 import { ModalOptions, defaultOptions, OPTIONS } from './modal-library';
 import { ModalConfirmComponent } from './modal-confirm.component';
+import { ModalConfirm2Component } from './modal-confirm2.component';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { ModalConfirmComponent } from './modal-confirm.component';
         ModalFooterComponent,
         ModalHeaderComponent,
         ModalConfirmComponent,
+        ModalConfirm2Component,
     ],
     exports: [
         ModalComponent,
@@ -24,12 +26,13 @@ import { ModalConfirmComponent } from './modal-confirm.component';
         ModalFooterComponent,
         ModalHeaderComponent,
         ModalConfirmComponent,
+        ModalConfirm2Component,
     ],
     providers: [
-        { provide: 'MODAL_DEFAULT_OPTIONS', useValue: defaultOptions },
-        { provide: 'MODAL_ROOT_OPTIONS', useValue: defaultOptions },
+        { provide: 'MODAL_OPTIONS_DEFAULT', useValue: defaultOptions },
+        { provide: 'MODAL_OPTIONS_ROOT', useValue: defaultOptions },
         { provide: OPTIONS, useValue: defaultOptions },
-    ]
+    ],
 })
 export class ModalModule {
 
@@ -37,9 +40,9 @@ export class ModalModule {
         return {
             ngModule: ModalModule,
             providers: [
-                { provide: 'MODAL_ROOT_OPTIONS', useValue: options },
-                { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_DEFAULT_OPTIONS', 'MODAL_ROOT_OPTIONS'] },
-            ]
+                { provide: 'MODAL_OPTIONS_ROOT', useValue: options },
+                { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_OPTIONS_DEFAULT', 'MODAL_OPTIONS_ROOT'] },
+            ],
         };
     }
 
@@ -48,8 +51,8 @@ export class ModalModule {
             ngModule: ModalModule,
             providers: [
                 { provide: 'MODAL_CHILD_OPTIONS', useValue: options },
-                { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_DEFAULT_OPTIONS', 'MODAL_ROOT_OPTIONS', 'MODAL_CHILD_OPTIONS'] },
-            ]
+                { provide: OPTIONS, useFactory: createOptions, deps: ['MODAL_OPTIONS_DEFAULT', 'MODAL_OPTIONS_ROOT', 'MODAL_CHILD_OPTIONS'] },
+            ],
         };
     }
 }

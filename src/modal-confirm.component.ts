@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
     selector: 'modal-confirm',
     template: `<modal (onOpen)="onOpen()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
     <modal-header [title]="title" [hasCloseButton]="false">
-        <ng-content select="header"></ng-content>
+        <ng-content select="[header]"></ng-content>
     </modal-header>
     <modal-content>
         <div [innerHTML]="content"></div>
@@ -18,12 +18,12 @@ import { Observable } from 'rxjs/Observable';
     <modal-footer>
         <div [class]="options.confirmFooterToolbarClass">
             <button role="ok" type="button" [class]="options.confirmOkayButtonClass"
-                (click)="ok()">{{okayLabel}}</button>
+                (click)="ok()">{{ okayLabel }}</button>
             <button role="cancel" type="button" [class]="options.confirmCancelButtonClass"
-                (click)="cancel()" #confirmCancel>{{cancelLabel}}</button>
+                (click)="cancel()" #confirmCancel>{{ cancelLabel }}</button>
         </div>
     </modal-footer>
-</modal>`
+</modal>`,
 })
 export class ModalConfirmComponent implements OnInit {
 
@@ -62,7 +62,7 @@ export class ModalConfirmComponent implements OnInit {
             .take(1);
     }
 
-    private close() {
+    close() {
         if (this.modal) {
             this.modal.close();
         }

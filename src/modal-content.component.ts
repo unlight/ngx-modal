@@ -5,7 +5,7 @@ import { ModalOptions, OPTIONS } from './modal-library';
     selector: 'modal-content',
     template: `<main [class]="options.contentClass">
         <ng-content></ng-content>
-    </main>`
+    </main>`,
 })
 export class ModalContentComponent {
 

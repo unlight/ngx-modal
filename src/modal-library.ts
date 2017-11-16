@@ -48,6 +48,10 @@ export const defaultOptions = {
     backOnClose: false,
     hasCloseButton: true,
     confirmFooterToolbarClass: 'ngx-modal-confirm-footer-toolbar',
+    /**
+     * Class wrapper for modal-confirm2 component buttons toolbar.
+     */
+    confirmFooterButtonsClass: '',
     confirmOkayButtonClass: '',
     confirmCancelButtonClass: '',
     /**

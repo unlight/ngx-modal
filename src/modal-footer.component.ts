@@ -5,7 +5,7 @@ import { OPTIONS, ModalOptions } from './modal-library';
     selector: 'modal-footer',
     template: `<footer [class]="options.footerClass">
         <ng-content></ng-content>
-    </footer>`
+    </footer>`,
 })
 export class ModalFooterComponent {
 
