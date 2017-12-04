@@ -57,7 +57,7 @@ export class ModalConfirmComponent implements OnInit {
     }
 
     get okay(): Observable<boolean> {
-        return this.result.asObservable()
+        return this.result
             .filter(value => value)
             .take(1);
     }
