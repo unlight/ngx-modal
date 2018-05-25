@@ -203,6 +203,11 @@ Selector: `modal-footer`
 
 Selector: `modal-content`
 
+
+DEVELOPMENT
+---
+* release: `npm run release`
+
 CHANGELOG
 ---
 * 4.7.0: Ability to prevent memory leak in modal confirm component
