@@ -2,6 +2,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ModalConfirmComponent } from '../src/index';
 import { ModalConfirm2Component } from '../src/index';
+import { Subscription } from 'rxjs';
 
 require('../src/ngx-modal.css');
 
@@ -25,6 +26,7 @@ require('../src/ngx-modal.css');
         cancelLabel="CANCEL"
         [isNotification]="true"
         [settings]="{bodyClass:'ngx-modal-body ngx-modal-body2'}"
+        (onClose)="confirmClose()"
         content="Are you are sure?"></modal-confirm>
     <modal-confirm2 #confirm2
         title="Confirmation2"
@@ -32,6 +34,7 @@ require('../src/ngx-modal.css');
         cancelLabel="CANCEL"
         [isNotification]="true"
         [settings]="{confirmOkayButtonClass: 'x-right', confirmCancelButtonClass: 'x-right'}"
+        (onClose)="confirm2Close()"
         content="Second confirm: Are you are sure?"></modal-confirm2>
 <router-outlet name="modal"></router-outlet>
 <router-outlet name="lazy_modal"></router-outlet>
@@ -41,22 +44,32 @@ export class AppComponent {
 
     @ViewChild(ModalConfirmComponent) private confirm: ModalConfirmComponent;
     @ViewChild(ModalConfirm2Component) private confirm2: ModalConfirm2Component;
+    confirmSubscription: Subscription;
+    confirm2Subscription: Subscription;
 
     constructor(
     ) {
     }
 
-    protected openConfirm() {
+    openConfirm() {
         this.confirm.open();
-        this.confirm.okay.subscribe(() => {
+        this.confirmSubscription = this.confirm.okay.subscribe(() => {
             console.log('Okay...'); // eslint-disable-line no-console
         });
     }
 
-    protected openConfirm2() {
+    confirmClose() {
+        this.confirmSubscription.unsubscribe();
+    }
+
+    openConfirm2() {
         this.confirm2.open();
-        this.confirm2.okay.subscribe(() => {
+        this.confirm2Subscription = this.confirm2.okay.subscribe(() => {
             console.log('Okay...'); // eslint-disable-line no-console
         });
+    }
+
+    confirm2Close() {
+        this.confirm2Subscription.unsubscribe();
     }
 }

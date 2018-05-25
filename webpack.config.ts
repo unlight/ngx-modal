@@ -55,6 +55,9 @@ export = (options: any = defaultOptions) => {
             exprContextCritical: false,
             rules: [
                 {
+                    parser: { amd: false }
+                },
+                {
                     test: /\.ts$/,
                     use: (() => {
                         let result: any[] = [
