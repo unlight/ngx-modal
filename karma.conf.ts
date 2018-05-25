@@ -14,19 +14,13 @@ export = (config: any) => {
         preprocessors: {
             '**/spec.module.js': ['webpack', 'sourcemap']
         },
-        browsers: ['Nightmare'],
+        browsers: ['Electron'],
         frameworks: [
             'jasmine',
         ],
         reporters: ['progress'],
         mime: {
             'text/x-typescript': ['ts', 'tsx'],
-        },
-        nightmareOptions: {
-            width: 800,
-            height: 600,
-            show: false,
-            devTools: false
         },
         webpack: webpackConfig({ hmr: false, test: true }),
         webpackMiddleware: {
