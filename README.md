@@ -50,7 +50,9 @@ export class GreetingsModalComponent {
 ```
 <modal-confirm #confirm 
     title="Confirmation" 
-    content="Are you are sure?"></modal-confirm>
+    content="Are you are sure?"
+    (onClose)="onCloseConfirm()"
+></modal-confirm>
 <a (click)="openConfirm()">Confirm</a>
 ```
 3. Add `openConfirm` method
@@ -58,12 +60,17 @@ export class GreetingsModalComponent {
 export class AppComponent {
 
     @ViewChild(ModalConfirmComponent) private confirm: ModalConfirmComponent;
+    confirmSubscription: Subscription;
 
     protected openConfirm() {
         this.confirm.open();
-        this.confirm.okay.subscribe(() => {
+        this.confirmSubscription = this.confirm.okay.subscribe(() => {
             console.log('Okay...');
         });
+    }
+
+    protected onCloseConfirm() {
+        this.confirmSubscription.unsubscribe();
     }
 }
 ```
@@ -153,6 +160,9 @@ Inputs:
 * `okayLabel: string = 'Okay'` Okay button label
 * `cancelLabel: string = 'Cancel'`
 
+Outputs:
+* `onClose: EventEmitter<void>` 
+
 Properties:
 * `result`: readonly Subject<boolean>` Result of confirm
 * `isOpen: readonly boolean`
@@ -193,8 +203,14 @@ Selector: `modal-footer`
 
 Selector: `modal-content`
 
+
+DEVELOPMENT
+---
+* release: `npm run release`
+
 CHANGELOG
 ---
+* 4.7.0: Ability to prevent memory leak in modal confirm component
 * 4.6.6: Introduced modal-confirm2 component
 * 4.6.3: Pass settings from modal-confirm to modal component
 * 4.6.2: Fixed class names for modal confirm component

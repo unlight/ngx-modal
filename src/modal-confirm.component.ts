@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, ElementRef, Inject, OnInit } from '@angular/core';
+import { Component, ViewChild, Input, ElementRef, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'modal-confirm',
-    template: `<modal (onOpen)="onOpen()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
+    template: `<modal (onOpen)="onOpen()" (onClose)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
     <modal-header [title]="title" [hasCloseButton]="false">
         <ng-content select="[header]"></ng-content>
     </modal-header>
@@ -33,6 +33,7 @@ export class ModalConfirmComponent implements OnInit {
     @Input() okayLabel: string = 'Okay';
     @Input() cancelLabel: string = 'Cancel';
     @Input() settings: Partial<ModalOptions> = {};
+    @Output() onClose = new EventEmitter<void>();
     readonly result: Subject<boolean> = new Subject<boolean>();
     @ViewChild(ModalComponent) private modal: ModalComponent;
     @ViewChild('confirmCancel') private confirmCancel: ElementRef;
@@ -83,5 +84,9 @@ export class ModalConfirmComponent implements OnInit {
             const element = this.confirmCancel.nativeElement;
             element && element.focus && element.focus();
         });
+    }
+
+    onCloseModal() {
+        this.onClose.emit();
     }
 }

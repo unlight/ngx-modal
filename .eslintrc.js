@@ -18,8 +18,8 @@ const tslintRules = Object.assign({}, tslintRulesRecommended, {
     "angular-whitespace": [true, "check-interpolation", "check-pipe"],
     "banana-in-box": true,
     "templates-no-negated-async": true,
-    "directive-selector": [true, "attribute", "ng", "camelCase"],
-    "component-selector": [true, "element", "ng", "kebab-case"],
+    // "directive-selector": [true, "attribute", "ng", "camelCase"],
+    // "component-selector": [true, "element", "ng", "kebab-case"],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
@@ -34,6 +34,7 @@ const tslintRules = Object.assign({}, tslintRulesRecommended, {
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "pipe-impure": true,
+    "prefer-const": false,
 });
 
 module.exports = {
