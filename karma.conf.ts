@@ -1,7 +1,8 @@
-/// <reference path="node_modules/@types/node/index.d.ts" />
 import { Config } from 'karma';
 import { Configuration } from 'webpack';
 import webpackConfig = require('./webpack.config');
+
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 export = (config: any) => {
 
@@ -12,9 +13,20 @@ export = (config: any) => {
             { pattern: 'spec.module.js' },
         ],
         preprocessors: {
-            '**/spec.module.js': ['webpack', 'sourcemap']
+            '**/spec.module.js': ['webpack', 'sourcemap'],
         },
-        browsers: ['Electron'],
+        browsers: ['ChromeCustom'],
+        customLaunchers: {
+            ChromeCustom: {
+                base: 'ChromeHeadless',
+                flags: [
+                    '--no-sandbox',
+                    '--headless',
+                    '--disable-gpu',
+                    '--remote-debugging-port=9222',
+                ],
+            },
+        },
         frameworks: [
             'jasmine',
         ],
@@ -24,8 +36,8 @@ export = (config: any) => {
         },
         webpack: webpackConfig({ hmr: false, test: true }),
         webpackMiddleware: {
-            stats: 'minimal'
-        }
+            stats: 'minimal',
+        },
     });
 
 };

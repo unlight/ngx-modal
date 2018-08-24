@@ -4,5 +4,5 @@
     "entryFile": "./index.ts"
   },
   "src": "src",
-  "dest": "package"
+  "dest": "dist"
 }
