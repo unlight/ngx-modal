@@ -34,10 +34,10 @@ export class ModalConfirmComponent implements OnInit {
     @Input() cancelLabel: string = 'Cancel';
     @Input() settings: Partial<ModalOptions> = {};
     @Output() onClose = new EventEmitter<void>();
+    options: ModalOptions;
     readonly result: Subject<boolean> = new Subject<boolean>();
     @ViewChild(ModalComponent) private modal: ModalComponent;
     @ViewChild('confirmCancel') private confirmCancel: ElementRef;
-    options: ModalOptions;
 
     constructor(
         @Inject(OPTIONS) private modalOptions: ModalOptions,

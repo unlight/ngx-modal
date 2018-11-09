@@ -23,10 +23,10 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() settings: Partial<ModalOptions>;
     @Output() onClose: EventEmitter<any> = new EventEmitter();
     @Output() onOpen: EventEmitter<any> = new EventEmitter();
+    options: ModalOptions;
     @ViewChild('body') private body: ElementRef;
     @ContentChild(ModalHeaderComponent) private header: ModalHeaderComponent;
     private closeSubscription: Subscription;
-    options: ModalOptions;
 
     constructor(
         @Inject(OPTIONS) private modalOptions: ModalOptions,
