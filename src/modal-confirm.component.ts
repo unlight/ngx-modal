@@ -37,13 +37,14 @@ export class ModalConfirmComponent implements OnInit {
     readonly result: Subject<boolean> = new Subject<boolean>();
     @ViewChild(ModalComponent) private modal: ModalComponent;
     @ViewChild('confirmCancel') private confirmCancel: ElementRef;
+    options: ModalOptions;
 
     constructor(
-        @Inject(OPTIONS) public options: ModalOptions,
+        @Inject(OPTIONS) private modalOptions: ModalOptions,
     ) { }
 
     ngOnInit() {
-        Object.assign(this.options, this.settings);
+        this.options = Object.assign({}, this.modalOptions, this.settings);
     }
 
     open() {
