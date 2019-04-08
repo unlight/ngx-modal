@@ -1,6 +1,12 @@
 #!/bin/bash
 PATH="$PWD/node_modules/.bin":$PATH
 
+build() {
+    ng-packagr
+    mv src/ngx-modal2.metadata.json dist
+    cp src/ngx-modal.css dist
+}
+
 eslint_run() {
     eslint src --ext ts
 }
