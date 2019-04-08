@@ -1,3 +1,4 @@
+/// <reference path="node_modules/@types/node/index.d.ts" />
 import * as webpack from 'webpack';
 import * as fs from 'fs';
 import * as Path from 'path';
@@ -13,12 +14,9 @@ const defaultOptions = {
 
 export = (options: any = defaultOptions) => {
     const config: any = {
-        // mode: 'development',
         context: context,
         entry: (() => {
-            if (options.test) {
-                return false;
-            }
+            if (options.test) return false;
             return {
                 app: './example/main.ts',
             };
@@ -57,7 +55,7 @@ export = (options: any = defaultOptions) => {
             exprContextCritical: false,
             rules: [
                 {
-                    parser: { amd: false },
+                    parser: { amd: false }
                 },
                 {
                     test: /\.ts$/,
@@ -69,7 +67,7 @@ export = (options: any = defaultOptions) => {
                                     useTranspileModule: true,
                                     isolatedModules: true,
                                     transpileOnly: true,
-                                },
+                                }
                             },
                             'angular-router-loader',
                         ];
@@ -84,26 +82,26 @@ export = (options: any = defaultOptions) => {
                 {
                     test: /\.component\.html$/,
                     use: [
-                        { loader: 'raw-loader' },
-                    ],
+                        { loader: 'raw-loader' }
+                    ]
                 },
                 {
                     test: /index\.ejs$/,
                     use: [
                         { loader: 'ejs-loader' },
-                    ],
+                    ]
                 },
                 {
                     test: /\.component\.css$/,
                     use: [
                         { loader: 'css-to-string-loader' },
                         { loader: 'css-loader', options: { importLoaders: 1 } },
-                    ],
+                    ]
                 },
                 {
                     test: /\.css$/,
                     use: (() => {
-                        const result = [
+                        let result = [
                             { loader: 'style-loader' },
                             { loader: 'css-loader' },
                         ];
@@ -113,16 +111,16 @@ export = (options: any = defaultOptions) => {
                 {
                     test: /\.(woff|woff2|eot|ttf|png|svg)$/,
                     use: [
-                        { loader: 'file-loader', options: { name: 'i/[name]-[hash:6].[ext]' } },
-                    ],
+                        { loader: 'file-loader', options: { name: 'i/[name]-[hash:6].[ext]' } }
+                    ]
                 },
             ],
         },
         plugins: (() => {
             const result: any[] = [
                 new webpack.WatchIgnorePlugin([
-                    /node_modules/,
-                ]),
+                    /node_modules/
+                ])
             ];
             const HtmlWebpackPlugin = require('html-webpack-plugin');
             result.push(new HtmlWebpackPlugin({
@@ -138,8 +136,9 @@ export = (options: any = defaultOptions) => {
                 }));
             }
             return result;
-        })(),
+        })()
     };
 
     return config;
 }
+

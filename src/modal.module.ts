@@ -7,6 +7,7 @@ import { ModalHeaderComponent } from './modal-header.component';
 import { ModalOptions, defaultOptions, OPTIONS } from './modal-library';
 import { ModalConfirmComponent } from './modal-confirm.component';
 import { ModalConfirm2Component } from './modal-confirm2.component';
+import { ModalConfirm3Component } from './modal-confirm3.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { ModalConfirm2Component } from './modal-confirm2.component';
         ModalHeaderComponent,
         ModalConfirmComponent,
         ModalConfirm2Component,
+        ModalConfirm3Component,
     ],
     exports: [
         ModalComponent,
@@ -27,6 +29,7 @@ import { ModalConfirm2Component } from './modal-confirm2.component';
         ModalHeaderComponent,
         ModalConfirmComponent,
         ModalConfirm2Component,
+        ModalConfirm3Component,
     ],
     providers: [
         { provide: 'MODAL_OPTIONS_DEFAULT', useValue: defaultOptions },

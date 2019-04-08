@@ -29,17 +29,15 @@ export class ModalComponent implements OnDestroy, OnInit {
     private closeSubscription: Subscription;
 
     constructor(
-        @Inject(OPTIONS) modalOptions: ModalOptions,
+        @Inject(OPTIONS) private modalOptions: ModalOptions,
         private renderer: Renderer2,
         private location: Location,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-    ) {
-        this.options = modalOptions;
-    }
+    ) { }
 
     ngOnInit() {
-        this.options = { ...this.options, ...this.settings };
+        this.options = { ...this.modalOptions, ...this.settings };
         if (this.isOpen) {
             this.open();
         }
