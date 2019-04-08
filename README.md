@@ -219,4 +219,5 @@ Selector: `modal-content`
 
 
 ## DEVELOPMENT
-* release: `npm run release`
+* `npm run dev`
+

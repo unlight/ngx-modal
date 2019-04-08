@@ -172,8 +172,7 @@ export class ModalComponent implements OnDestroy, OnInit {
             const routeConfig = this.activatedRoute.parent && this.activatedRoute.parent.routeConfig;
             if (routeConfig && routeConfig.children && activatedUrlSegment) {
                 result = routeConfig.children
-                    .map(x => x.path)
-                    .indexOf(activatedUrlSegment) !== -1;
+                    .map(x => x.path).includes(activatedUrlSegment);
             }
         }
         return result;

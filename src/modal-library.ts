@@ -70,7 +70,7 @@ export type ModalOptions = typeof defaultOptions;
 export const OPTIONS = new InjectionToken<ModalOptions>('ModalOptions');
 
 export function createFocusManager(container: HTMLElement, newTarget: Node) {
-    const elements = Array.from<HTMLElement>(container.querySelectorAll(focusableSelector) as any);
+    const elements = [...container.querySelectorAll(focusableSelector) as any];
     const isFocusInFirst = (): boolean => {
         const [element] = elements;
         return element && newTarget === element;
