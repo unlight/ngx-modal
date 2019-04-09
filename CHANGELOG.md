@@ -5,6 +5,8 @@
 
 * Removed source from dist package ([c8660b3](https://github.com/unlight/ngx-modal/commit/c8660b3))
 
+## Previous Versions
+
 * 4.7.1: Updated some dependecies (replaced electron by chrome-headless)
 * 4.7.0: Ability to prevent memory leak in modal confirm component
 * 4.6.6: Introduced modal-confirm2 component
