@@ -1,5 +1,6 @@
 {
   "extends": [
+    "codelyzer",
     "tslint:recommended",
     "tslint-clean-code",
     "tslint-microsoft-contrib",
@@ -149,6 +150,11 @@
       "check-operator",
       "check-separator",
       "check-type"
-    ]
+    ],
+    "no-function-constructor-with-string-args": false,
+    "no-increment-decrement": false,
+    "no-unnecessary-bind": false,
+    "prefer-type-cast": false,
+    ".": false
   }
 }

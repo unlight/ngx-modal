@@ -39,7 +39,7 @@ import { ModalConfirm3Component } from './modal-confirm3.component';
 })
 export class ModalModule {
 
-    static forRoot(options: Partial<ModalOptions> = {}): ModuleWithProviders {
+    static forRoot(options: Partial<ModalOptions> = {}): ModuleWithProviders { // tslint:disable-line:function-name
         return {
             ngModule: ModalModule,
             providers: [
@@ -49,7 +49,7 @@ export class ModalModule {
         };
     }
 
-    static forChild(options: Partial<ModalOptions> = {}): ModuleWithProviders {
+    static forChild(options: Partial<ModalOptions> = {}): ModuleWithProviders { // tslint:disable-line:function-name
         return {
             ngModule: ModalModule,
             providers: [
@@ -60,6 +60,6 @@ export class ModalModule {
     }
 }
 
-export function createOptions(...options) {
+export function createOptions(...options: any[]) {
     return Object.assign({}, ...options);
 }
