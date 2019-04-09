@@ -3,7 +3,7 @@ import { createFocusManager, OPTIONS, ModalOptions } from './modal-library';
 import { ModalHeaderComponent } from './modal-header.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Router, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
+import { ActivatedRoute, Router, PRIMARY_OUTLET, UrlSegment, NavigationExtras } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
@@ -21,45 +21,43 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() isOpen: boolean;
     @Input() isNotification: boolean;
     @Input() settings: Partial<ModalOptions>;
-    @Output() onClose: EventEmitter<any> = new EventEmitter();
-    @Output() onOpen: EventEmitter<any> = new EventEmitter();
+    @Output() onClose: EventEmitter<Event | undefined> = new EventEmitter();
+    @Output() onOpen: EventEmitter<Event | undefined> = new EventEmitter();
     options: ModalOptions;
-    @ViewChild('body') private body: ElementRef;
-    @ContentChild(ModalHeaderComponent) private header: ModalHeaderComponent;
+    @ViewChild('body') private readonly body: ElementRef;
+    @ContentChild(ModalHeaderComponent) private readonly header: ModalHeaderComponent;
     private closeSubscription: Subscription;
 
     constructor(
-        @Inject(OPTIONS) modalOptions: ModalOptions,
-        private renderer: Renderer2,
-        private location: Location,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
-    ) {
-        this.options = modalOptions;
-    }
+        @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
+        private readonly renderer: Renderer2,
+        private readonly location: Location,
+        private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute,
+    ) { }
 
     ngOnInit() {
-        this.options = { ...this.options, ...this.settings };
+        this.options = { ...this.modalOptions, ...this.settings };
         if (this.isOpen) {
             this.open();
         }
     }
 
-    close(event?: any) {
+    close(event?: Event) {
         this.cleanUp();
         this.onClose.emit(event);
         this.isOpen = false;
         if (this.isRouteModal()) {
             if (this.options.routeOnClose) {
                 if (this.isAuxRoute() && Array.isArray(this.options.routeOutlets)) {
-                    const outlets = this.options.routeOutlets.reduce((acc, outlet) => (acc[outlet] = null, acc), {});
-                    const navigateOptions: any = { };
+                    const outlets = this.options.routeOutlets.reduce((acc, outlet) => (acc[outlet] = null, acc), {} as { [x: string]: null });
+                    const navigateOptions: NavigationExtras = {};
                     if (this.options.closeRelativeToParent) {
                         navigateOptions.relativeTo = this.activatedRoute.parent;
                     }
-                    this.router.navigate(['.', { outlets }], navigateOptions);
+                    this.router.navigate(['.', { outlets }], navigateOptions); // tslint:disable-line:no-floating-promises
                 } else {
-                    this.router.navigate(['.'], { relativeTo: this.activatedRoute.parent });
+                    this.router.navigate(['.'], { relativeTo: this.activatedRoute.parent }); // tslint:disable-line:no-floating-promises
                 }
             } else if (this.options.backOnClose) {
                 this.location.back();
@@ -67,7 +65,7 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    open(event?: any) {
+    open(event?: Event) {
         this.onOpen.emit(event);
         this.isOpen = true;
         this.doOnOpen();
@@ -79,14 +77,13 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     @HostListener('document:keydown', ['$event'])
     keyDownHandler(e: KeyboardEvent) {
-        switch (e.key) { // eslint-disable-line tslint/config
+        switch (e.key) { // eslint-disable-line @typescript-eslint/tslint/config
             case 'Esc':
             case 'Escape':
                 this.close(e);
                 break;
             case 'Tab':
                 this.onTabKeyDown(e);
-                break;
         }
     }
 
@@ -102,7 +99,7 @@ export class ModalComponent implements OnDestroy, OnInit {
             return;
         }
         let focusChanged = false;
-        const fm = createFocusManager(this.body.nativeElement, (e.target || e.srcElement) as Node);
+        const fm = createFocusManager(this.body.nativeElement, e.target as Node);
         if (e.shiftKey) {
             if (fm.isFocusOutside() || fm.isFocusInFirst()) {
                 focusChanged = fm.focusLast();
@@ -127,7 +124,9 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
         setTimeout(() => {
             const element = this.body.nativeElement;
-            element && element.focus && element.focus();
+            if (element && typeof element.focus === 'function') {
+                element.focus();
+            }
         });
         this.preventBackgroundScrolling();
     }
@@ -175,14 +174,14 @@ export class ModalComponent implements OnDestroy, OnInit {
             if (routeConfig && routeConfig.children && activatedUrlSegment) {
                 result = routeConfig.children
                     .map(x => x.path)
-                    .indexOf(activatedUrlSegment) !== -1;
+                    .includes(activatedUrlSegment);
             }
         }
         return result;
     }
 
     private isAuxRoute() {
-        let result: boolean = false;
+        let result = false;
         let route: ActivatedRoute = this.activatedRoute;
         result = route.outlet !== PRIMARY_OUTLET;
         do {

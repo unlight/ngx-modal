@@ -2,24 +2,23 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "importHelpers": true,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "inlineSources": true,
-    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "outDir": "dist",
     "pretty": true,
     "removeComments": false,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "suppressExcessPropertyErrors": true,
-    "suppressImplicitAnyIndexErrors": false,
-    "isolatedModules": false,
-    "outDir": "lib",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
     "lib": [
-      "es7",
-      "dom"
+      "dom",
+      "esnext"
     ]
   },
   "include": [

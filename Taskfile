@@ -1,26 +1,10 @@
 #!/bin/bash
 PATH="$PWD/node_modules/.bin":$PATH
 
-hello() {
-    echo Hello from taskfile
-    echo args: "$1" "$2" "$3"
-}
-
-remark_run() {
-    node -r ts-node/register/transpile-only node_modules/remark-cli/cli.js readme.md "$@"
-}
-
-remark_output() {
-    remark_run --output
-}
-
 build() {
-    rm -rf dist
-    cp -rf src dist && /usr/bin/find dist -name '*.spec.ts' | xargs rm -f
-    cd dist
-    tsc index.ts --importHelpers --target es2015 --module commonjs --sourceMap true --skipLibCheck true --declaration true
-    cd ..
-    cp README.md LICENSE package.json dist
+    ng-packagr
+    mv src/ngx-modal2.metadata.json dist
+    cp src/ngx-modal.css dist
 }
 
 eslint_run() {

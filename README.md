@@ -107,16 +107,21 @@ export const defaultOptions: ModalOptions = {
     backOnClose: true,
     hasCloseButton: true,
     confirmFooterToolbarClass: 'ngx-modal-confirm-footer-toolbar',
-    confirmOkayButtonClass: '',
     /**
-     * Class wrapper for modal-confirm2 component buttons toolbar
+     * Class wrapper for modal-confirm2 component buttons toolbar.
      */
-    confirmCancelButtonClass: '',
     confirmFooterButtonsClass: '',
+    confirmFooterButtonItemClass: '',
+    confirmOkayButtonClass: '',
+    confirmCancelButtonClass: '',
     /**
      * When true, when modal closes router.navigate() will be called with options relativeTo: activatedRoute.parent
      */
     closeRelativeToParent: false,
+    /**
+     * Content box class for modal-confirm3 component
+     */
+    confirmContentBoxClass: '',
 };
 ```
 
@@ -180,6 +185,19 @@ Methods: See `ModalConfirmComponent`
 ModalConfirm2Component inherits ModalConfirmComponent, the only difference is markup.
 In ModalConfirm2Component `modal-footer` is not used.
 
+#### ModalConfirm3Component
+
+Selector: `modal-confirm3`
+
+Inputs: See `ModalConfirmComponent`
+
+Properties: See `ModalConfirmComponent`
+
+Methods: See `ModalConfirmComponent`
+
+ModalConfirm3Component inherits ModalConfirmComponent, the only difference is markup.  
+Used more advanced markup in footer.
+
 #### ModalHeaderComponent
 
 Selector: `modal-header`
@@ -201,4 +219,5 @@ Selector: `modal-content`
 
 
 ## DEVELOPMENT
-* release: `npm run release`
+* `npm run dev`
+

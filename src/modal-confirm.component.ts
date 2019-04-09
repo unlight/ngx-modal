@@ -1,3 +1,4 @@
+/* tslint:disable:no-import-side-effect */
 import { Component, ViewChild, Input, ElementRef, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
@@ -30,20 +31,21 @@ export class ModalConfirmComponent implements OnInit {
     @Input() title: string;
     @Input() content: string;
     @Input() isNotification: boolean;
-    @Input() okayLabel: string = 'Okay';
-    @Input() cancelLabel: string = 'Cancel';
+    @Input() okayLabel = 'Okay';
+    @Input() cancelLabel = 'Cancel';
     @Input() settings: Partial<ModalOptions> = {};
     @Output() onClose = new EventEmitter<void>();
+    options: ModalOptions;
     readonly result: Subject<boolean> = new Subject<boolean>();
-    @ViewChild(ModalComponent) private modal: ModalComponent;
-    @ViewChild('confirmCancel') private confirmCancel: ElementRef;
+    @ViewChild(ModalComponent) private readonly modal: ModalComponent;
+    @ViewChild('confirmCancel') private readonly confirmCancel: ElementRef;
 
     constructor(
-        @Inject(OPTIONS) public options: ModalOptions,
+        @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
     ) { }
 
     ngOnInit() {
-        Object.assign(this.options, this.settings);
+        this.options = {...this.modalOptions, ...this.settings};
     }
 
     open() {

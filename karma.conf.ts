@@ -1,10 +1,8 @@
 import { Config } from 'karma';
 import { Configuration } from 'webpack';
-import webpackConfig = require('./webpack.config');
+import webpackConfig from './webpack.config';
 
-process.env.CHROME_BIN = require('puppeteer').executablePath();
-
-export = (config: any) => {
+export default (config: any) => {
 
     const karma: Config = config;
 

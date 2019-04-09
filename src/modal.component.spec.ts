@@ -37,13 +37,14 @@ describe('ModalComponent:', () => {
     });
 
     it('open event should be emitted', (done) => {
+        fixture.detectChanges();
         component.onOpen.subscribe(() => done());
         component.open();
     });
 
     it('open method should set isOpen', () => {
+        fixture.detectChanges();
         component.open();
-
         expect(component.isOpen).toBe(true);
     });
 
@@ -93,6 +94,7 @@ describe('ModalComponent:', () => {
         }));
 
         it('aux route checks parents', () => {
+            fixture.detectChanges();
             const router: Router = TestBed.get(Router);
             const navigate = spyOn(router, 'navigate');
             component.close();

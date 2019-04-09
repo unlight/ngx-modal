@@ -8,17 +8,26 @@ const context = __dirname;
 
 const defaultOptions = {
     test: false,
-    aot: false,
 };
 
-export = (options: any = defaultOptions) => {
+export default (options: any = defaultOptions) => {
+    const stats: webpack.Options.Stats = {
+        version: false,
+        maxModules: 0,
+        children: false,
+        warningsFilter: [
+            /Critical dependency/,
+            /export .* was not found in/,
+            /System.import/,
+            /Cannot find SourceMap/,
+        ],
+    };
+
     const config: any = {
-        // mode: 'development',
+        mode: 'development',
         context: context,
         entry: (() => {
-            if (options.test) {
-                return false;
-            }
+            if (options.test) return false;
             return {
                 app: './example/main.ts',
             };
@@ -39,8 +48,7 @@ export = (options: any = defaultOptions) => {
             historyApiFallback: true,
             hot: true,
             inline: true,
-            stats: 'normal',
-            // stats: { reasons: true, maxModules: 10000 },
+            stats,
         },
         node: {
             // workaround for webpack-dev-server issue
@@ -57,7 +65,7 @@ export = (options: any = defaultOptions) => {
             exprContextCritical: false,
             rules: [
                 {
-                    parser: { amd: false },
+                    parser: { amd: false }
                 },
                 {
                     test: /\.ts$/,
@@ -69,41 +77,36 @@ export = (options: any = defaultOptions) => {
                                     useTranspileModule: true,
                                     isolatedModules: true,
                                     transpileOnly: true,
-                                },
+                                }
                             },
                             'angular-router-loader',
                         ];
-                        if (options.aot) {
-                            result = [{
-                                loader: '@ngtools/webpack',
-                            }];
-                        }
                         return result;
                     })(),
                 },
                 {
                     test: /\.component\.html$/,
                     use: [
-                        { loader: 'raw-loader' },
-                    ],
+                        { loader: 'raw-loader' }
+                    ]
                 },
                 {
                     test: /index\.ejs$/,
                     use: [
                         { loader: 'ejs-loader' },
-                    ],
+                    ]
                 },
                 {
                     test: /\.component\.css$/,
                     use: [
                         { loader: 'css-to-string-loader' },
                         { loader: 'css-loader', options: { importLoaders: 1 } },
-                    ],
+                    ]
                 },
                 {
                     test: /\.css$/,
                     use: (() => {
-                        const result = [
+                        let result = [
                             { loader: 'style-loader' },
                             { loader: 'css-loader' },
                         ];
@@ -113,16 +116,16 @@ export = (options: any = defaultOptions) => {
                 {
                     test: /\.(woff|woff2|eot|ttf|png|svg)$/,
                     use: [
-                        { loader: 'file-loader', options: { name: 'i/[name]-[hash:6].[ext]' } },
-                    ],
+                        { loader: 'file-loader', options: { name: 'i/[name]-[hash:6].[ext]' } }
+                    ]
                 },
             ],
         },
         plugins: (() => {
             const result: any[] = [
                 new webpack.WatchIgnorePlugin([
-                    /node_modules/,
-                ]),
+                    /node_modules/
+                ])
             ];
             const HtmlWebpackPlugin = require('html-webpack-plugin');
             result.push(new HtmlWebpackPlugin({
@@ -130,15 +133,8 @@ export = (options: any = defaultOptions) => {
                 minify: false,
                 excludeChunks: [],
             }));
-            if (options.aot) {
-                const { AotPlugin } = require('@ngtools/webpack');
-                result.push(new AotPlugin({
-                    tsConfigPath: Path.resolve('tsconfig.json'),
-                    entryModule: Path.resolve('example/app.module#AppModule'),
-                }));
-            }
             return result;
-        })(),
+        })()
     };
 
     return config;

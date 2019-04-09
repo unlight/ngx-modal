@@ -52,12 +52,17 @@ export const defaultOptions = {
      * Class wrapper for modal-confirm2 component buttons toolbar.
      */
     confirmFooterButtonsClass: '',
+    confirmFooterButtonItemClass: '',
     confirmOkayButtonClass: '',
     confirmCancelButtonClass: '',
     /**
      * When true, when modal closes router.navigate() will be called with options relativeTo: activatedRoute.parent
      */
     closeRelativeToParent: false,
+    /**
+     * Content box class for modal-confirm3 component
+     */
+    confirmContentBoxClass: '',
 };
 
 export type ModalOptions = typeof defaultOptions;
@@ -65,7 +70,7 @@ export type ModalOptions = typeof defaultOptions;
 export const OPTIONS = new InjectionToken<ModalOptions>('ModalOptions');
 
 export function createFocusManager(container: HTMLElement, newTarget: Node) {
-    const elements = Array.from<HTMLElement>(container.querySelectorAll(focusableSelector) as any);
+    const elements = [...container.querySelectorAll(focusableSelector) as any];
     const isFocusInFirst = (): boolean => {
         const [element] = elements;
         return element && newTarget === element;
