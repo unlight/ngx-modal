@@ -1,0 +1,37 @@
+#!/bin/bash
+PATH="$PWD/node_modules/.bin":$PATH
+
+build() {
+    ng-packagr
+    mv src/ngx-modal2.metadata.json dist
+    cp src/ngx-modal.css dist
+}
+
+eslint_run() {
+    eslint src --ext ts
+}
+
+eslint_watch() {
+    eslint_run
+    inotifywait_cmd=`watch_cmd`
+    while true; do
+        $inotifywait_cmd -r src && \
+            eslint_run
+    done
+}
+
+watch_cmd() {
+    case `uname -o` in
+        Linux)
+            echo 'inotifywait'
+        ;;
+        Msys)
+            echo 'inotifywait-win32.cmd'
+        ;;
+        *)
+            echo 'inotifywait'
+        ;;
+    esac
+}
+
+"$@"

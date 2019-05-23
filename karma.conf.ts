@@ -1,10 +1,8 @@
 import { Config } from 'karma';
 import { Configuration } from 'webpack';
-import webpackConfig = require('./webpack.config');
+import webpackConfig from './webpack.config';
 
-process.env.CHROME_BIN = require('puppeteer').executablePath();
-
-export = (config: any) => {
+export default (config: any) => {
 
     const karma: Config = config;
 
@@ -13,7 +11,7 @@ export = (config: any) => {
             { pattern: 'spec.module.js' },
         ],
         preprocessors: {
-            '**/spec.module.js': ['webpack', 'sourcemap']
+            '**/spec.module.js': ['webpack', 'sourcemap'],
         },
         browsers: ['ChromeCustom'],
         customLaunchers: {
@@ -36,8 +34,8 @@ export = (config: any) => {
         },
         webpack: webpackConfig({ hmr: false, test: true }),
         webpackMiddleware: {
-            stats: 'minimal'
-        }
+            stats: 'minimal',
+        },
     });
 
 };

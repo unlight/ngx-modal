@@ -1,6 +1,11 @@
-/node_modules/
+/node_modules
+/.idea
+/.awcache
+/.vscode
+/.nyc_output
+*.log
 ~*
-/package/
-/package-lock.json
-/.ng_build/
-*.log.*
+/dist/
+/dist_*
+/.rts2_cache_*
+.ng_build

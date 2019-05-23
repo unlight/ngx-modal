@@ -1,14 +1,12 @@
 # ngx-modal
 Open modal window for your Angular X application
 
-INSTALL
----
+## INSTALL
 ```
 npm i -S ngx-modal2
 ```
 
-USAGE
----
+## USAGE
 #### Example 1: Route modal
 1. Add `<router-outlet name="modal"></router-outlet>` to `AppComponent` template
 2. Configure `AppModule`
@@ -75,8 +73,7 @@ export class AppComponent {
 }
 ```
 
-CONFIGURATION
----
+## CONFIGURATION
 `ModalModule` has some configuration
 ```
 @NgModule({
@@ -128,8 +125,7 @@ export const defaultOptions: ModalOptions = {
 };
 ```
 
-API
----
+## API
 #### ModalModule
 * `ModalModule.forRoot(modalOptions)` override default options
 * `ModalModule.forChild(modalOptions)` set modal options for this module
@@ -222,29 +218,6 @@ Selector: `modal-footer`
 Selector: `modal-content`
 
 
-DEVELOPMENT
----
-* release: `npm run release`
+## DEVELOPMENT
+* `npm run dev`
 
-CHANGELOG
----
-* 4.8.0: Added modal-confirm3 component
-* 4.7.0: Ability to prevent memory leak in modal confirm component
-* 4.6.6: Introduced modal-confirm2 component
-* 4.6.3: Pass settings from modal-confirm to modal component
-* 4.6.2: Fixed class names for modal confirm component
-* 4.6.1: new option closeRelativeToParent
-* 4.6.0: Fixed detection of aux route
-* 4.5.0: added input settings for modal component
-* 4.3.0: added type to buttons
-* 4.2.0: added license
-* 4.1.0: introduced `routed` input property
-* 4.0.0: fixed aot
-* 3.3.0: fixed aot
-* 3.1.0: fixed closing for confirm
-* 3.0.0: removed routeOutlets, routeOnClose options - replaced by backOnClose option
-* 2.0.0: fixed closing route modal in lazy components
-* 1.1.1: refactoring
-* 1.1.0: angular package format [ng-packagr](https://github.com/dherges/ng-packagr)
-* 1.1.0-0: added unit tests
-* 1.0.0: first release

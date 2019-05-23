@@ -1,6 +1,19 @@
-/node_modules/
+# .gitignore
+/node_modules
+/.idea
+/.awcache
+/.vscode
+/.nyc_output
+*.log
 ~*
-/package/
-/package-lock.json
-/.ng_build/
-/.npmrc
+# .npmignore
+/tsconfig.json
+/.eslintrc.js
+/.editorconfig
+/.gitlab-ci.yml
+/gulpfile.ts
+/jest.config.js
+/.releaserc.json
+/.nycrc.json
+/tslint.json
+/ng-package.json
