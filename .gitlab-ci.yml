@@ -1,4 +1,4 @@
-image: node:11
+image: ${CI_REGISTRY}/efs/docker/ci-nodechrome:10
 
 stages:
     - test
