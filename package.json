@@ -1,5 +1,5 @@
 {
-  "name": "ngx-modal2",
+  "name": "ert-ngx-modal2",
   "description": "Open modal window for your Angular X application",
   "version": "0.0.0-dev",
   "scripts": {
@@ -26,14 +26,15 @@
     "angular2"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "http://nexus.ert.com/nexus/content/repositories/npm-automation"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/unlight/ngx-modal.git"
+    "url": "git+https://gitcloud.ert.com/efs/etm/ert-ngx-modal2.git"
   },
-  "homepage": "https://github.com/unlight/ngx-modal",
+  "homepage": "https://gitcloud.ert.com/efs/etm/ert-ngx-modal2",
   "peerDependencies": {
     "rxjs": "5.X",
     "@angular/core": ">=2.4 <6",
@@ -52,6 +53,7 @@
     "@semantic-release/commit-analyzer": "6.1.0",
     "@semantic-release/git": "7.0.8",
     "@semantic-release/github": "5.2.10",
+    "@semantic-release/gitlab": "3.1.2",
     "@semantic-release/npm": "5.1.4",
     "@semantic-release/release-notes-generator": "7.1.4",
     "@types/core-js": "2.5.0",

@@ -1,0 +1,27 @@
+image: node:11
+
+stages:
+    - test
+    - release
+
+test:
+    stage: test
+    tags: ['docker', 'linux']
+    script:
+        - node -v
+        - npm -v
+        - npm i
+        - npm test
+        - npm run build
+    coverage: '/All files\s+\|\s+(\S+)\s+\|/'
+
+release:
+    stage: release
+    tags: ['docker', 'linux']
+    script:
+        - npm i
+        - npm run build
+        - npx semantic-release
+    only:
+        refs:
+            - master

@@ -1,9 +1,9 @@
-## [4.7.2](https://github.com/unlight/ngx-modal/compare/v4.7.1...v4.7.2) (2019-04-09)
+## [4.7.2](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/compare/v4.7.1...v4.7.2) (2019-04-09)
 
 
 ### Bug Fixes
 
-* Removed source from dist package ([c8660b3](https://github.com/unlight/ngx-modal/commit/c8660b3))
+* Removed source from dist package ([c8660b3](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/commit/c8660b3))
 
 ## Previous Versions
 
