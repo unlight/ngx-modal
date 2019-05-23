@@ -13,18 +13,14 @@ test:
         - npm i
         - npm test
         - npm run build
-    artifacts:
-        paths:
-            - dist
-        expire_in: 1h
+    coverage: '/All files\s+\|\s+(\S+)\s+\|/'
 
 release:
-    variables:
-        GIT_STRATEGY: none
     stage: release
     tags: ['docker', 'linux']
     script:
         - npm i
+        - npm run build
         - npx semantic-release
     only:
         refs:
