@@ -34,6 +34,7 @@ next:
         - npm run build
         - npm config ls -l
         - npm config set registry "http://nexus.ert.com/nexus/content/repositories/npm-automation"
+        - npm config ls -l
         - npx semantic-release --branch next -d
     only:
         refs:
