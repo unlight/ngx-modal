@@ -1,15 +1,20 @@
-import { Component, Inject } from '@angular/core';
-import { OPTIONS, ModalOptions } from './modal-library';
+import { Component, Inject, AfterViewInit, ElementRef } from '@angular/core';
+import { OPTIONS, ModalOptions, unwrap } from './modal-library';
 
 @Component({
     selector: 'modal-footer',
-    template: `<footer [class]="options.footerClass">
+    template: `<ng-container><footer [class]="options.footerClass">
         <ng-content></ng-content>
-    </footer>`,
+    </footer></ng-container>`,
 })
-export class ModalFooterComponent {
+export class ModalFooterComponent implements AfterViewInit {
 
     constructor(
         @Inject(OPTIONS) public readonly options: ModalOptions,
+        private elementRef: ElementRef,
     ) { }
+
+    ngAfterViewInit() {
+        unwrap(this.elementRef.nativeElement);
+    }
 }
