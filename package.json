@@ -27,7 +27,8 @@
   ],
   "publishConfig": {
     "access": "public",
-    "registry": "http://nexus.ert.com/nexus/content/repositories/npm-automation"
+    "registry": "http://nexus.ert.com/nexus/content/repositories/npm-automation",
+    "tag": "next"
   },
   "license": "MIT",
   "repository": {
