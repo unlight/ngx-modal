@@ -1,7 +1,7 @@
 {
   "name": "ngx-modal2",
   "description": "Open modal window for your Angular X application",
-  "version": "4.7.1",
+  "version": "0.0.0-dev",
   "scripts": {
     "dev": "webpack-dev-server --hot --progress --colors",
     "karma": "karma start",
