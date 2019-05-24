@@ -26,9 +26,7 @@
     "angular2"
   ],
   "publishConfig": {
-    "access": "public",
-    "registry": "http://nexus.ert.com/nexus/content/repositories/npm-automation",
-    "tag": "next"
+    "access": "public"
   },
   "license": "MIT",
   "repository": {
