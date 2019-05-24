@@ -35,7 +35,10 @@
     "url": "git+https://gitcloud.ert.com/efs/etm/ert-ngx-modal2.git"
   },
   "homepage": "https://gitcloud.ert.com/efs/etm/ert-ngx-modal2",
+  "dependencies": {
+  },
   "peerDependencies": {
+    "focus-trap": "5",
     "rxjs": "5.X",
     "@angular/core": ">=2.4 <6",
     "@angular/common": ">=2.4 <6",
