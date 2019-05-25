@@ -122,11 +122,7 @@ export default (options: any = defaultOptions) => {
             ],
         },
         plugins: (() => {
-            const result: any[] = [
-                new webpack.WatchIgnorePlugin([
-                    /node_modules/
-                ])
-            ];
+            const result: any[] = [];
             const HtmlWebpackPlugin = require('html-webpack-plugin');
             result.push(new HtmlWebpackPlugin({
                 template: './example/index.ejs',

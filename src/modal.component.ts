@@ -1,10 +1,11 @@
 import { Input, Output, Component, ElementRef, EventEmitter, Inject, OnDestroy, ViewChild, Renderer2, ContentChild, OnInit, HostListener } from '@angular/core';
-import { createFocusManager, OPTIONS, ModalOptions } from './modal-library';
+import { OPTIONS, ModalOptions } from './modal-library';
 import { ModalHeaderComponent } from './modal-header.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, PRIMARY_OUTLET, UrlSegment, NavigationExtras } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import focusTrap from 'focus-trap';
 
 @Component({
     exportAs: 'modal',
@@ -27,6 +28,7 @@ export class ModalComponent implements OnDestroy, OnInit {
     @ViewChild('body') private readonly body: ElementRef;
     @ContentChild(ModalHeaderComponent) private readonly header: ModalHeaderComponent;
     private closeSubscription: Subscription;
+    private focusTrap: ReturnType<typeof focusTrap>;
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
@@ -82,8 +84,6 @@ export class ModalComponent implements OnDestroy, OnInit {
             case 'Escape':
                 this.close(e);
                 break;
-            case 'Tab':
-                this.onTabKeyDown(e);
         }
     }
 
@@ -92,28 +92,6 @@ export class ModalComponent implements OnDestroy, OnInit {
             [this.options.isOpenClass]: this.isOpen,
             [this.options.isNotificationClass]: this.isNotification,
         };
-    }
-
-    private onTabKeyDown(e: KeyboardEvent) {
-        if (!this.isOpen) {
-            return;
-        }
-        let focusChanged = false;
-        const fm = createFocusManager(this.body.nativeElement, e.target as Node);
-        if (e.shiftKey) {
-            if (fm.isFocusOutside() || fm.isFocusInFirst()) {
-                focusChanged = fm.focusLast();
-            }
-        } else {
-            if (fm.isFocusOutside() || fm.isFocusInLast()) {
-                focusChanged = fm.focusFirst();
-                // focusChanged = true;
-            }
-        }
-        if (focusChanged) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
     }
 
     private doOnOpen() {
@@ -126,6 +104,8 @@ export class ModalComponent implements OnDestroy, OnInit {
             const element = this.body.nativeElement;
             if (element && typeof element.focus === 'function') {
                 element.focus();
+                this.focusTrap = focusTrap(element);
+                this.focusTrap.activate();
             }
         });
         this.preventBackgroundScrolling();
@@ -137,6 +117,9 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
         if (this.closeSubscription) {
             this.closeSubscription.unsubscribe();
+        }
+        if (this.focusTrap) {
+            this.focusTrap.deactivate();
         }
     }
 

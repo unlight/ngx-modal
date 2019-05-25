@@ -5,19 +5,19 @@ import { FeatureComponent } from './feature.component';
 import { ModalModule } from '../../src/index';
 import { RouterModule } from '@angular/router';
 import { LazyModalComponent } from '../lazy-modal.component';
-import { Child1Component } from './child1.component';
-import { ParamComponent } from './parameter-comp';
+import { ChildComponent } from './child.component';
+import { ParameterComponent } from './parameter.component';
 
 const featureRoutes = [
     {
         path: '', component: FeatureComponent, children: [
-            { path: '', component: Child1Component },
-            { path: 'children_lazy_modal_comp', component: LazyModalComponent },
-            { path: 'children_lazy_modal_comp2', component: LazyModalComponent },
+            { path: '', component: ChildComponent },
+            { path: 'children_lazy_modal_component', component: LazyModalComponent },
+            { path: 'children_lazy_modal_component2', component: LazyModalComponent },
         ]
     },
     { path: 'mxx', component: LazyModalComponent, outlet: 'lazy_modal' },
-    { path: ':reqid', component: ParamComponent },
+    { path: ':reqid', component: ParameterComponent },
 ];
 
 @NgModule({
@@ -27,10 +27,10 @@ const featureRoutes = [
         RouterModule.forChild(featureRoutes),
     ],
     declarations: [
-        ParamComponent,
+        ParameterComponent,
         FeatureComponent,
         LazyModalComponent,
-        Child1Component,
+        ChildComponent,
     ],
 })
 export class FeatureModule { }
