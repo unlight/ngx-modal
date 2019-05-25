@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'modal-confirm',
-    template: `<modal (onOpen)="onOpen()" (onClose)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
+    template: `<modal (onClose)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
     <modal-header [title]="title" [hasCloseButton]="false">
         <ng-content select="[header]"></ng-content>
     </modal-header>
@@ -79,13 +79,6 @@ export class ModalConfirmComponent implements OnInit {
     cancel() {
         this.result.next(false);
         this.close();
-    }
-
-    onOpen() {
-        setTimeout(() => {
-            const element = this.confirmCancel.nativeElement;
-            element && element.focus && element.focus();
-        });
     }
 
     onCloseModal() {

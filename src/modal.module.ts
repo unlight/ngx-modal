@@ -60,6 +60,6 @@ export class ModalModule {
     }
 }
 
-export function createOptions(...options: any[]) {
+export function createOptions(...options: Partial<ModalOptions>[]) {
     return Object.assign({}, ...options);
 }

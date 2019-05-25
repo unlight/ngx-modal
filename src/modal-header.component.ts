@@ -16,16 +16,16 @@ export class ModalHeaderComponent implements AfterViewInit {
 
     @Input() public title: string;
     @Input() public hasCloseButton: boolean;
-    public closeEventEmitter: EventEmitter<any> = new EventEmitter();
+    public closeEventEmitter: EventEmitter<Event> = new EventEmitter();
 
     constructor(
         @Inject(OPTIONS) public readonly options: ModalOptions,
-        private elementRef: ElementRef,
+        private readonly elementReference: ElementRef,
     ) {
         this.hasCloseButton = this.options.hasCloseButton;
     }
 
     ngAfterViewInit() {
-        unwrap(this.elementRef.nativeElement);
+        unwrap(this.elementReference.nativeElement);
     }
 }

@@ -35,7 +35,9 @@
     "url": "git+https://github.com/unlight/ngx-modal.git"
   },
   "homepage": "https://github.com/unlight/ngx-modal",
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^1.9.3"
+  },
   "peerDependencies": {
     "focus-trap": "5",
     "rxjs": "5.X",
@@ -100,7 +102,6 @@
     "style-loader": "0.23.1",
     "ts-node": "8.1.1",
     "tsickle": "0.35.0",
-    "tslib": "1.9.3",
     "tslint": "5.16.0",
     "tslint-clean-code": "0.2.9",
     "tslint-microsoft-contrib": "6.2.0",

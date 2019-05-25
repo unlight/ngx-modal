@@ -83,7 +83,6 @@ export class ModalComponent implements OnDestroy, OnInit {
             case 'Esc':
             case 'Escape':
                 this.close(e);
-                break;
         }
     }
 

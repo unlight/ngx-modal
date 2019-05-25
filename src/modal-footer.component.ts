@@ -11,10 +11,10 @@ export class ModalFooterComponent implements AfterViewInit {
 
     constructor(
         @Inject(OPTIONS) public readonly options: ModalOptions,
-        private elementRef: ElementRef,
+        private readonly elementReference: ElementRef,
     ) { }
 
     ngAfterViewInit() {
-        unwrap(this.elementRef.nativeElement);
+        unwrap(this.elementReference.nativeElement);
     }
 }
