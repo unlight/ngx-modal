@@ -52,7 +52,7 @@ describe('ModalComponent:', () => {
     it('keydown should be handled', () => {
         spyOn(component, 'keyDownHandler');
         const event = document.createEvent('KeyboardEvent');
-        event.initKeyboardEvent('keydown', true, true, window, 'Tab', event.location, '', event.repeat, event.locale);
+        event.initKeyboardEvent('keydown', true, true, window, 'Tab', event.location, '', event.repeat, '');
         document.dispatchEvent(event);
         expect(component.keyDownHandler).toHaveBeenCalled(); // eslint-disable-line jasmine/prefer-toHaveBeenCalledWith
     });
