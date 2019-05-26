@@ -78,11 +78,11 @@ export class ModalComponent implements OnDestroy, OnInit {
     }
 
     @HostListener('document:keydown', ['$event'])
-    keyDownHandler(e: KeyboardEvent) {
-        switch (e.key) { // eslint-disable-line @typescript-eslint/tslint/config
+    keyDownHandler(event: KeyboardEvent) {
+        switch (event.key) { // eslint-disable-line @typescript-eslint/tslint/config
             case 'Esc':
             case 'Escape':
-                this.close(e);
+                this.close(event);
         }
     }
 
@@ -95,8 +95,8 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     private doOnOpen() {
         if (this.header) {
-            this.closeSubscription = this.header.closeEventEmitter.subscribe((e: Event) => {
-                this.close(e);
+            this.closeSubscription = this.header.closeEventEmitter.subscribe((event: Event) => {
+                this.close(event);
             });
         }
         setTimeout(() => {
@@ -165,7 +165,6 @@ export class ModalComponent implements OnDestroy, OnInit {
     private isAuxRoute() {
         let result = false;
         let route: ActivatedRoute = this.activatedRoute;
-        result = route.outlet !== PRIMARY_OUTLET;
         do {
             result = route.outlet !== PRIMARY_OUTLET;
             if (result) {

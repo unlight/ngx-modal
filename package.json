@@ -4,6 +4,7 @@
   "version": "0.0.0-dev",
   "scripts": {
     "dev": "webpack-dev-server --hot --progress --colors",
+    "dev2": "sh Taskfile dev2",
     "karma": "karma start",
     "test:r": "npm run karma -- --single-run",
     "test": "npm run eslint && npm run tscheck && npm run test:cov",

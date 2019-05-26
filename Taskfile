@@ -1,6 +1,11 @@
 #!/bin/bash
 PATH="$PWD/node_modules/.bin":$PATH
 
+dev2() {
+    npm run eslint:w 2>&1 &
+    npm run test:w 2>&1 &
+}
+
 build() {
     ng-packagr
     mv src/ngx-modal2.metadata.json dist

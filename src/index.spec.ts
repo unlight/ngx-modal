@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/tslint/config */
 import { Component } from '@angular/core';
-import { ModalModule } from './modal.module'
+import { ModalModule } from './modal.module';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -29,7 +30,7 @@ describe('Component usage', () => {
     });
 
     it('smoke test', () => {
-        // TestBed.overrideComponent(TestComponent, { set: { template: `` } });
+        TestBed.overrideComponent(TestComponent, { set: { template: `` } });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();

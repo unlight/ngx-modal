@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/tslint/config */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalHeaderComponent } from './modal-header.component';
 import { ModalModule } from './modal.module';

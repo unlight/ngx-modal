@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/tslint/config */
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { ModalComponent } from './modal.component';
@@ -50,9 +51,9 @@ describe('ModalComponent:', () => {
 
     it('keydown should be handled', () => {
         spyOn(component, 'keyDownHandler');
-        const e = document.createEvent('KeyboardEvent');
-        e.initKeyboardEvent('keydown', true, true, window, 'Tab', e.location, '', e.repeat, e.locale);
-        document.dispatchEvent(e);
+        const event = document.createEvent('KeyboardEvent');
+        event.initKeyboardEvent('keydown', true, true, window, 'Tab', event.location, '', event.repeat, event.locale);
+        document.dispatchEvent(event);
         expect(component.keyDownHandler).toHaveBeenCalled(); // eslint-disable-line jasmine/prefer-toHaveBeenCalledWith
     });
 
