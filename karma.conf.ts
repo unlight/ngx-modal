@@ -34,7 +34,7 @@ export default (config: any) => {
         },
         webpack: webpackConfig({ hmr: false, test: true }),
         webpackMiddleware: {
-            stats: 'minimal',
+            stats: 'errors-only',
         },
     });
 

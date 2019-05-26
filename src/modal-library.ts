@@ -52,16 +52,3 @@ export const defaultOptions = {
 export type ModalOptions = typeof defaultOptions;
 
 export const OPTIONS = new InjectionToken<ModalOptions>('ModalOptions');
-
-export function unwrap(element: HTMLElement) {
-    // get the element's parent node
-    const parent = element.parentNode;
-    if (parent) {
-        // move all children out of the element
-        while (element.firstChild) {
-            parent.insertBefore(element.firstChild, element);
-        }
-        // remove the empty element
-        parent.removeChild(element);
-    }
-}
