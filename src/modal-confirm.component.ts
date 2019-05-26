@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'modal-confirm',
-    template: `<modal (onClose)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
+    template: `<modal (closemodal)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
     <modal-header [title]="title" [hasCloseButton]="false">
         <ng-content select="[header]"></ng-content>
     </modal-header>
@@ -34,11 +34,10 @@ export class ModalConfirmComponent implements OnInit {
     @Input() okayLabel = 'Okay';
     @Input() cancelLabel = 'Cancel';
     @Input() settings: Partial<ModalOptions> = {};
-    @Output() onClose = new EventEmitter<void>();
+    @Output() closemodal = new EventEmitter<void>();
     options: ModalOptions;
     readonly result: Subject<boolean> = new Subject<boolean>();
     @ViewChild(ModalComponent) private readonly modal: ModalComponent;
-    @ViewChild('confirmCancel') private readonly confirmCancel: ElementRef;
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
@@ -82,6 +81,6 @@ export class ModalConfirmComponent implements OnInit {
     }
 
     onCloseModal() {
-        this.onClose.emit();
+        this.closemodal.emit();
     }
 }

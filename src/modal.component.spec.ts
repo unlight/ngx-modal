@@ -39,7 +39,7 @@ describe('ModalComponent:', () => {
 
     it('open event should be emitted', (done) => {
         fixture.detectChanges();
-        component.onOpen.subscribe(() => done());
+        component.openmodal.subscribe(() => done());
         component.open();
     });
 

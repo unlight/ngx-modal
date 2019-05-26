@@ -49,7 +49,7 @@ export class GreetingsModalComponent {
 <modal-confirm #confirm 
     title="Confirmation" 
     content="Are you are sure?"
-    (onClose)="onCloseConfirm()"
+    (closemodal)="onCloseConfirm()"
 ></modal-confirm>
 <a (click)="openConfirm()">Confirm</a>
 ```
@@ -142,8 +142,8 @@ Inputs:
   supported settings: routeOnClose, routeOutlets, backOnClose, isOpenClass, isNotificationClass, popupOpenedClass
 
 Outputs:
-* `onClose: EventEmitter<any>`
-* `onOpen: EventEmitter<any>`
+* `closemodal: EventEmitter<any>`
+* `openmodal: EventEmitter<any>`
 
 Methods:
 * `open: void` Open modal
@@ -162,7 +162,7 @@ Inputs:
 * `cancelLabel: string = 'Cancel'`
 
 Outputs:
-* `onClose: EventEmitter<void>` 
+* `closemodal: EventEmitter<void>` 
 
 Properties:
 * `result`: readonly Subject<boolean>` Result of confirm

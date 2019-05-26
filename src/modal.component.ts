@@ -22,8 +22,8 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() isOpen: boolean;
     @Input() isNotification: boolean;
     @Input() settings: Partial<ModalOptions>;
-    @Output() onClose: EventEmitter<Event | undefined> = new EventEmitter();
-    @Output() onOpen: EventEmitter<Event | undefined> = new EventEmitter();
+    @Output() closemodal: EventEmitter<Event | undefined> = new EventEmitter();
+    @Output() openmodal: EventEmitter<Event | undefined> = new EventEmitter();
     options: ModalOptions;
     @ViewChild('body') private readonly body: ElementRef;
     @ContentChild(ModalHeaderComponent) private readonly header: ModalHeaderComponent;
@@ -47,7 +47,7 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     close(event?: Event) {
         this.cleanUp();
-        this.onClose.emit(event);
+        this.closemodal.emit(event);
         this.isOpen = false;
         if (this.isRouteModal()) {
             if (this.options.routeOnClose) {
@@ -68,7 +68,7 @@ export class ModalComponent implements OnDestroy, OnInit {
     }
 
     open(event?: Event) {
-        this.onOpen.emit(event);
+        this.openmodal.emit(event);
         this.isOpen = true;
         this.doOnOpen();
     }
