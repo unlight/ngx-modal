@@ -1,11 +1,10 @@
 /* tslint:disable:no-import-side-effect */
-import { Component, ViewChild, Input, ElementRef, Inject, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, Input, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import { ModalComponent } from './modal.component';
 import { ModalOptions, OPTIONS } from './modal-library';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'modal-confirm',
@@ -21,7 +20,7 @@ import { Observable } from 'rxjs/Observable';
             <button role="ok" type="button" [class]="options.confirmOkayButtonClass"
                 (click)="ok()">{{ okayLabel }}</button>
             <button role="cancel" type="button" [class]="options.confirmCancelButtonClass"
-                (click)="cancel()" #confirmCancel>{{ cancelLabel }}</button>
+                (click)="cancel()">{{ cancelLabel }}</button>
         </div>
     </modal-footer>
 </modal>`,
@@ -36,15 +35,18 @@ export class ModalConfirmComponent implements OnInit {
     @Input() settings: Partial<ModalOptions> = {};
     @Output() closemodal = new EventEmitter<void>();
     options: ModalOptions;
-    readonly result: Subject<boolean> = new Subject<boolean>();
     @ViewChild(ModalComponent) private readonly modal: ModalComponent;
+    readonly result: Subject<boolean> = new Subject<boolean>();
+    readonly okay = this.result
+        .filter(value => value)
+        .take(1);
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
     ) { }
 
     ngOnInit() {
-        this.options = {...this.modalOptions, ...this.settings};
+        this.options = { ...this.modalOptions, ...this.settings };
     }
 
     open() {
@@ -56,12 +58,6 @@ export class ModalConfirmComponent implements OnInit {
 
     get isOpen() {
         return this.modal.isOpen;
-    }
-
-    get okay(): Observable<boolean> {
-        return this.result
-            .filter(value => value)
-            .take(1);
     }
 
     close() {

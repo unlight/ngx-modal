@@ -22,8 +22,8 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() isOpen: boolean;
     @Input() isNotification: boolean;
     @Input() settings: Partial<ModalOptions>;
-    @Output() closemodal: EventEmitter<Event | undefined> = new EventEmitter();
-    @Output() openmodal: EventEmitter<Event | undefined> = new EventEmitter();
+    @Output() closemodal: EventEmitter<void> = new EventEmitter();
+    @Output() openmodal: EventEmitter<void> = new EventEmitter();
     options: ModalOptions;
     @ViewChild('body') private readonly body: ElementRef;
     @ContentChild(ModalHeaderComponent) private readonly header: ModalHeaderComponent;
@@ -45,9 +45,9 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    close(event?: Event) {
+    close() {
         this.cleanUp();
-        this.closemodal.emit(event);
+        this.closemodal.emit();
         this.isOpen = false;
         if (this.isRouteModal()) {
             if (this.options.routeOnClose) {
@@ -67,8 +67,8 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    open(event?: Event) {
-        this.openmodal.emit(event);
+    open() {
+        this.openmodal.emit();
         this.isOpen = true;
         this.doOnOpen();
     }
@@ -79,10 +79,13 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     @HostListener('document:keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent) {
-        switch (event.key) { // eslint-disable-line @typescript-eslint/tslint/config
+        if (!this.isOpen) {
+            return;
+        }
+        switch (event.key) {
             case 'Esc':
             case 'Escape':
-                this.close(event);
+                this.close();
         }
     }
 
@@ -95,12 +98,12 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     private doOnOpen() {
         if (this.header) {
-            this.closeSubscription = this.header.closeEventEmitter.subscribe((event: Event) => {
-                this.close(event);
+            this.closeSubscription = this.header.closeEventEmitter.subscribe(() => {
+                this.close();
             });
         }
         setTimeout(() => {
-            const element = this.body.nativeElement;
+            const element: HTMLElement | undefined = this.body.nativeElement;
             if (element && typeof element.focus === 'function') {
                 element.focus();
                 this.focusTrap = focusTrap(element);
