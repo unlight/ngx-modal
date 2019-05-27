@@ -142,8 +142,8 @@ Inputs:
   supported settings: routeOnClose, routeOutlets, backOnClose, isOpenClass, isNotificationClass, popupOpenedClass
 
 Outputs:
-* `closemodal: EventEmitter<any>`
-* `openmodal: EventEmitter<any>`
+* `closemodal: EventEmitter<void>`
+* `openmodal: EventEmitter<void>`
 
 Methods:
 * `open: void` Open modal

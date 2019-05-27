@@ -57,9 +57,18 @@ describe('ModalComponent:', () => {
         expect(component.keyDownHandler).toHaveBeenCalled(); // eslint-disable-line jasmine/prefer-toHaveBeenCalledWith
     });
 
+    it('escape if modal is not visible should not call close', () => {
+        fixture = TestBed.createComponent(ModalComponent);
+        component = fixture.componentInstance;
+        spyOn(component, 'close');
+        const event = document.createEvent('KeyboardEvent');
+        event.initKeyboardEvent('keydown', true, true, window, 'Escape', event.location, '', event.repeat, '');
+        document.dispatchEvent(event);
+        expect(component.close).not.toHaveBeenCalled();
+    });
+
     describe('route aux related', () => {
 
-        let navigate: jasmine.Spy;
         const mockActivatedRoute = {
             snapshot: {
                 data: {},
