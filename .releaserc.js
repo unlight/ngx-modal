@@ -9,7 +9,12 @@ module.exports = {
                 "pkgRoot": "dist"
             }
         ],
-        "@semantic-release/gitlab",
         "@semantic-release/git"
     ]
 };
+
+if (process.env.GITLAB_CI) {
+    module.exports.plugins.push("@semantic-release/gitlab");
+} else {
+    module.exports.plugins.push("@semantic-release/github");
+}
