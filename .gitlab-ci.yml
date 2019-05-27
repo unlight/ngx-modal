@@ -1,4 +1,6 @@
 image: ${CI_REGISTRY}/efs/docker/ci-nodechrome:10
+variables:
+    PACKAGE_NAME: ert-ngx-modal2
 
 stages:
     - test
@@ -22,6 +24,8 @@ release:
         - npm i
         - npm run build
         - npm config set registry "http://nexus.ert.com/nexus/content/repositories/npm-automation"
+        - npm i -g node-jq
+        - cat package.json | jq ".name = \"$PACKAGE_NAME\"" > package.json
         - npx semantic-release
     only:
         refs:
