@@ -32,11 +32,6 @@
     "access": "public"
   },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/unlight/ngx-modal.git"
-  },
-  "homepage": "https://github.com/unlight/ngx-modal",
   "dependencies": {
     "tslib": "^1.9.3"
   },
@@ -59,6 +54,7 @@
     "@semantic-release/commit-analyzer": "7.0.0-beta.2",
     "@semantic-release/git": "7.1.0-beta.3",
     "@semantic-release/github": "5.4.0-beta.1",
+    "@semantic-release/gitlab": "3.1.2",
     "@semantic-release/npm": "5.2.0-beta.6",
     "@semantic-release/release-notes-generator": "7.1.7",
     "@types/core-js": "2.5.0",
