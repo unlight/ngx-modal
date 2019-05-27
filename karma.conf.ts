@@ -1,12 +1,13 @@
-import { Config } from 'karma';
-import { Configuration } from 'webpack';
 import webpackConfig from './webpack.config';
 
 export default (config: any) => {
 
-    const karma: Config = config;
+    const webpackOptions = { hmr: false, test: true, coverage: false };
 
-    karma.set({
+    config.set({
+        client: {
+            captureConsole: true,
+        },
         files: [
             { pattern: 'spec.module.js' },
         ],
@@ -32,10 +33,26 @@ export default (config: any) => {
         mime: {
             'text/x-typescript': ['ts', 'tsx'],
         },
-        webpack: webpackConfig({ hmr: false, test: true }),
         webpackMiddleware: {
-            stats: 'minimal',
+            stats: 'errors-only',
         },
+    });
+
+    if (process.argv.indexOf('--coverage') !== -1) {
+        webpackOptions.coverage = true;
+        config.set({
+            reporters: ['progress', 'coverage', 'remap-coverage'],
+            coverageReporter: {
+                type: 'in-memory'
+            },
+            remapCoverageReporter: {
+                text: null,
+            },
+        });
+    }
+
+    config.set({
+        webpack: webpackConfig(webpackOptions),
     });
 
 };

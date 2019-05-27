@@ -1,4 +1,5 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+/* eslint-disable @typescript-eslint/tslint/config */
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { ModalComponent } from './modal.component';
 import { ModalModule } from './modal.module';
@@ -9,50 +10,50 @@ describe('ModalComponent:', () => {
 
     let component: ModalComponent;
     let fixture: ComponentFixture<ModalComponent>;
-    let de: DebugElement;
 
-    beforeEach(async(() => {
-        TestBed
-            .configureTestingModule({
-                imports: [
-                    RouterTestingModule,
-                    ModalModule,
-                ],
-                declarations: [
-                ],
-                schemas: [],
-                providers: [
-                ],
-            })
-            .compileComponents()
-            .then(() => {
-                fixture = TestBed.createComponent(ModalComponent);
-                component = fixture.componentInstance;
-                de = fixture.debugElement;
-            });
-    }));
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule,
+                ModalModule,
+            ],
+            declarations: [
+            ],
+            schemas: [],
+            providers: [
+            ],
+        });
+    });
 
     it('smoke', () => {
+        fixture = TestBed.createComponent(ModalComponent);
+        component = fixture.componentInstance;
         expect(component).toBeTruthy();
     });
 
     it('open event should be emitted', (done) => {
+        fixture = TestBed.createComponent(ModalComponent);
+        component = fixture.componentInstance;
         fixture.detectChanges();
-        component.onOpen.subscribe(() => done());
+        component.openmodal.subscribe(() => done());
         component.open();
     });
 
     it('open method should set isOpen', () => {
+        fixture = TestBed.createComponent(ModalComponent);
+        component = fixture.componentInstance;
         fixture.detectChanges();
         component.open();
         expect(component.isOpen).toBe(true);
     });
 
     it('keydown should be handled', () => {
+        fixture = TestBed.createComponent(ModalComponent);
+        component = fixture.componentInstance;
         spyOn(component, 'keyDownHandler');
-        const e = document.createEvent('KeyboardEvent');
-        e.initKeyboardEvent('keydown', true, true, window, 'Tab', e.location, '', e.repeat, e.locale);
-        document.dispatchEvent(e);
+        const event = document.createEvent('KeyboardEvent');
+        event.initKeyboardEvent('keydown', true, true, window, 'Tab', event.location, '', event.repeat, '');
+        document.dispatchEvent(event);
         expect(component.keyDownHandler).toHaveBeenCalled(); // eslint-disable-line jasmine/prefer-toHaveBeenCalledWith
     });
 
@@ -73,33 +74,19 @@ describe('ModalComponent:', () => {
             },
         };
 
-        beforeEach(async(() => {
-            TestBed.resetTestingModule();
-            TestBed
-                .configureTestingModule({
-                    imports: [
-                        RouterTestingModule,
-                        ModalModule,
-                    ],
-                    providers: [
-                        { provide: ActivatedRoute, useValue: mockActivatedRoute },
-                    ],
-                })
-                .compileComponents()
-                .then(() => {
-                    fixture = TestBed.createComponent(ModalComponent);
-                    component = fixture.componentInstance;
-                    de = fixture.debugElement;
-                });
-        }));
+        beforeEach(() => {
+            TestBed.overrideProvider(ActivatedRoute, { useValue: mockActivatedRoute });
+        });
 
         it('aux route checks parents', () => {
+            fixture = TestBed.createComponent(ModalComponent);
+            component = fixture.componentInstance;
             fixture.detectChanges();
             const router: Router = TestBed.get(Router);
             const navigate = spyOn(router, 'navigate');
             component.close();
 
-            expect(router.navigate).toHaveBeenCalledWith(['.', { outlets: { modal: null } }], { });
+            expect(router.navigate).toHaveBeenCalledWith(['.', { outlets: { modal: null } }], {});
         });
 
     });

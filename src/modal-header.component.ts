@@ -1,5 +1,5 @@
-import { Component, Input, Inject, EventEmitter, ElementRef, AfterViewInit } from '@angular/core';
-import { ModalOptions, OPTIONS, unwrap } from './modal-library';
+import { Component, Input, Inject, EventEmitter } from '@angular/core';
+import { ModalOptions, OPTIONS } from './modal-library';
 
 @Component({
     selector: 'modal-header',
@@ -12,20 +12,15 @@ import { ModalOptions, OPTIONS, unwrap } from './modal-library';
         <ng-content></ng-content>
     </header>`,
 })
-export class ModalHeaderComponent implements AfterViewInit {
+export class ModalHeaderComponent {
 
     @Input() public title: string;
     @Input() public hasCloseButton: boolean;
-    public closeEventEmitter: EventEmitter<any> = new EventEmitter();
+    public closeEventEmitter: EventEmitter<Event> = new EventEmitter();
 
     constructor(
         @Inject(OPTIONS) public readonly options: ModalOptions,
-        private elementRef: ElementRef,
     ) {
         this.hasCloseButton = this.options.hasCloseButton;
-    }
-
-    ngAfterViewInit() {
-        unwrap(this.elementRef.nativeElement);
     }
 }

@@ -22,8 +22,8 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() isOpen: boolean;
     @Input() isNotification: boolean;
     @Input() settings: Partial<ModalOptions>;
-    @Output() onClose: EventEmitter<Event | undefined> = new EventEmitter();
-    @Output() onOpen: EventEmitter<Event | undefined> = new EventEmitter();
+    @Output() closemodal: EventEmitter<void> = new EventEmitter();
+    @Output() openmodal: EventEmitter<void> = new EventEmitter();
     options: ModalOptions;
     @ViewChild('body') private readonly body: ElementRef;
     @ContentChild(ModalHeaderComponent) private readonly header: ModalHeaderComponent;
@@ -45,9 +45,9 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    close(event?: Event) {
+    close() {
         this.cleanUp();
-        this.onClose.emit(event);
+        this.closemodal.emit();
         this.isOpen = false;
         if (this.isRouteModal()) {
             if (this.options.routeOnClose) {
@@ -67,8 +67,8 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    open(event?: Event) {
-        this.onOpen.emit(event);
+    open() {
+        this.openmodal.emit();
         this.isOpen = true;
         this.doOnOpen();
     }
@@ -78,12 +78,14 @@ export class ModalComponent implements OnDestroy, OnInit {
     }
 
     @HostListener('document:keydown', ['$event'])
-    keyDownHandler(e: KeyboardEvent) {
-        switch (e.key) { // eslint-disable-line @typescript-eslint/tslint/config
+    keyDownHandler(event: KeyboardEvent) {
+        if (!this.isOpen) {
+            return;
+        }
+        switch (event.key) {
             case 'Esc':
             case 'Escape':
-                this.close(e);
-                break;
+                this.close();
         }
     }
 
@@ -96,8 +98,8 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     private doOnOpen() {
         if (this.header) {
-            this.closeSubscription = this.header.closeEventEmitter.subscribe((e: Event) => {
-                this.close(e);
+            this.closeSubscription = this.header.closeEventEmitter.subscribe(() => {
+                this.close();
             });
         }
         setTimeout(() => {
@@ -166,7 +168,6 @@ export class ModalComponent implements OnDestroy, OnInit {
     private isAuxRoute() {
         let result = false;
         let route: ActivatedRoute = this.activatedRoute;
-        result = route.outlet !== PRIMARY_OUTLET;
         do {
             result = route.outlet !== PRIMARY_OUTLET;
             if (result) {

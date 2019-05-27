@@ -9,7 +9,7 @@ module.exports = {
                 "pkgRoot": "dist"
             }
         ],
-        "@semantic-release/gitlab",
+        "@semantic-release/github",
         "@semantic-release/git"
     ]
 };
