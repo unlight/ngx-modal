@@ -9,12 +9,6 @@
 ### Features
 
 * Added external focus trap ([dca8487](https://github.com/unlight/ngx-modal/commit/dca8487))
-* Unwrap selectors modal-header, modal-content, modal-footer ([30e4808](https://github.com/unlight/ngx-modal/commit/30e4808))
-
-
-### Reverts
-
-* Reverted element unwrapping ([2c32c35](https://github.com/unlight/ngx-modal/commit/2c32c35))
 
 
 ### Styles
@@ -26,7 +20,6 @@
 
 * Removed event from `closemodal` and `openmodal` events
 * Renamed events according to Angular style guide: `onClose` to `closemodal`, `onOpen` to `openmodal` (https://angular.io/guide/styleguide#dont-prefix-output-properties)
-* Generated structure changed, removed Angular's wrap tag selectors
 
 ## [4.7.2](https://github.com/unlight/ngx-modal/compare/v4.7.1...v4.7.2) (2019-04-09)
 
