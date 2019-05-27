@@ -21,22 +21,9 @@ release:
     script:
         - npm i
         - npm run build
+        - npm config set registry "http://nexus.ert.com/nexus/content/repositories/npm-automation"
         - npx semantic-release
     only:
         refs:
             - master
-
-next:
-    stage: release
-    tags: ['docker', 'linux']
-    script:
-        - npm i
-        - npm run build
-        - npm config ls -l
-        - npm config set registry "http://nexus.ert.com/nexus/content/repositories/npm-automation"
-        - npm config set tag next
-        - npm config ls -l
-        - npx semantic-release --branch next -d
-    only:
-        refs:
-            - next
+            - beta
