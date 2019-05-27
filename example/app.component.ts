@@ -62,6 +62,7 @@ export class AppComponent {
 
     confirmClose() {
         this.confirmSubscription.unsubscribe();
+        console.log('confirmClose');
     }
 
     openConfirm2() {
@@ -73,5 +74,6 @@ export class AppComponent {
 
     confirm2Close() {
         this.confirm2Subscription.unsubscribe();
+        console.log('confirm2Close');
     }
 }
