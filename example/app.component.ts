@@ -1,4 +1,3 @@
-/// <reference path="../node_modules/@types/node/index.d.ts" />
 import { Component, ViewChild } from '@angular/core';
 import { ModalConfirmComponent } from '../src/index';
 import { ModalConfirm2Component } from '../src/index';
@@ -9,35 +8,38 @@ require('../src/ngx-modal.css');
 @Component({
     selector: 'app',
     template: `
-    <a [routerLink]="[{ outlets: { 'modal': 'x'} }]">Modal 1</a> |
-    <a [routerLink]="[{ outlets: { 'modal': 'mx'} }]">Modal 2</a> |
-    <a [routerLink]="[{ outlets: { 'modal': 'data-routed'} }]">Modal (data routed)</a> |
-    <a (click)="openConfirm()">Confirm</a> |
-    <a (click)="openConfirm2()">Confirm2</a> |
-    <a routerLink="/feature">Go to Feature Module (lazy loaded)</a> |
-    <a routerLink="/feature/123">parameter-comp</a> |
-    <a routerLink="/custom_modal">custom_modal</a> |
+    <a [routerLink]="[{ outlets: { 'modal': 'x'} }]">Modal 1</a> <br/>
+    <a [routerLink]="[{ outlets: { 'modal': 'mx'} }]">Modal 2</a> <br/>
+    <a [routerLink]="[{ outlets: { 'modal': 'data-routed'} }]">Modal (data routed)</a> <br/>
+    <a (click)="openConfirm()">Confirm</a> <br/>
+    <a (click)="openConfirm2()">Confirm2</a> <br/>
+    <a routerLink="/feature">Go to Feature Module (lazy loaded)</a> <br/>
+    <a routerLink="/feature/123">parameter component</a> <br/>
+    <a routerLink="/custom_modal">custom_modal</a> <br/>
     <hr/>
+    router-outlet: <br/>
     <router-outlet></router-outlet>
     <hr/>
+    modal-confirm:
     <modal-confirm #confirm
         title="Confirmation"
         okayLabel="OK"
         cancelLabel="CANCEL"
         [isNotification]="true"
         [settings]="{bodyClass:'ngx-modal-body ngx-modal-body2'}"
-        (onClose)="confirmClose()"
-        content="Are you are sure?"></modal-confirm>
+        (closemodal)="confirmClose()"
+        content="Are you are sure?"></modal-confirm> <br/>
+    modal-confirm2:
     <modal-confirm2 #confirm2
         title="Confirmation2"
         okayLabel="OK"
         cancelLabel="CANCEL"
         [isNotification]="true"
         [settings]="{confirmOkayButtonClass: 'x-right', confirmCancelButtonClass: 'x-right'}"
-        (onClose)="confirm2Close()"
-        content="Second confirm: Are you are sure?"></modal-confirm2>
-<router-outlet name="modal"></router-outlet>
-<router-outlet name="lazy_modal"></router-outlet>
+        (closemodal)="confirm2Close()"
+        content="Second confirm: Are you are sure?"></modal-confirm2> <br/>
+router-outlet name=modal: <router-outlet name="modal"></router-outlet> <br/>
+router-outlet name=lazy_modal: <router-outlet name="lazy_modal"></router-outlet>
     `,
 })
 export class AppComponent {
@@ -60,6 +62,7 @@ export class AppComponent {
 
     confirmClose() {
         this.confirmSubscription.unsubscribe();
+        console.log('confirmClose');
     }
 
     openConfirm2() {
@@ -71,5 +74,6 @@ export class AppComponent {
 
     confirm2Close() {
         this.confirm2Subscription.unsubscribe();
+        console.log('confirm2Close');
     }
 }

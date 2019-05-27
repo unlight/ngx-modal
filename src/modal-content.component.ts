@@ -12,4 +12,5 @@ export class ModalContentComponent {
     constructor(
         @Inject(OPTIONS) public readonly options: ModalOptions,
     ) { }
+
 }

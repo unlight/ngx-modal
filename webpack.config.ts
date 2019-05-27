@@ -8,6 +8,7 @@ const context = __dirname;
 
 const defaultOptions = {
     test: false,
+    coverage: false,
 };
 
 export default (options: any = defaultOptions) => {
@@ -38,6 +39,7 @@ export default (options: any = defaultOptions) => {
             filename: '[name].js',
         },
         devtool: (() => {
+            if (options.test) return 'inline-source-map';
             return 'cheap-source-map';
         })(),
         devServer: {
@@ -119,14 +121,26 @@ export default (options: any = defaultOptions) => {
                         { loader: 'file-loader', options: { name: 'i/[name]-[hash:6].[ext]' } }
                     ]
                 },
+                ...(options.coverage ? [
+                    {
+                        enforce: 'post',
+                        test: /\.ts$/,
+                        exclude: [
+                            /\.spec\.ts$/,
+                            /node_modules/,
+                            /example/,
+                            /src[\\/]app[\\/]testing/,
+                        ],
+                        use: {
+                            loader: 'istanbul-instrumenter-loader',
+                            options: { esModules: true },
+                        },
+                    }
+                ] : [])
             ],
         },
         plugins: (() => {
-            const result: any[] = [
-                new webpack.WatchIgnorePlugin([
-                    /node_modules/
-                ])
-            ];
+            const result: any[] = [];
             const HtmlWebpackPlugin = require('html-webpack-plugin');
             result.push(new HtmlWebpackPlugin({
                 template: './example/index.ejs',

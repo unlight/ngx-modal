@@ -16,10 +16,10 @@ import { ModalComponent } from '../../src/index';
 </modal>
     `
 })
-export class ParamComponent {
+export class ParameterComponent {
 
-    @ViewChild(ModalComponent) modal;
-    isOpen;
+    @ViewChild(ModalComponent) modal: ModalComponent;
+    isOpen: boolean;
 
     open() {
         this.modal.open();

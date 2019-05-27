@@ -1,10 +1,11 @@
 import { Input, Output, Component, ElementRef, EventEmitter, Inject, OnDestroy, ViewChild, Renderer2, ContentChild, OnInit, HostListener } from '@angular/core';
-import { createFocusManager, OPTIONS, ModalOptions } from './modal-library';
+import { OPTIONS, ModalOptions } from './modal-library';
 import { ModalHeaderComponent } from './modal-header.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, PRIMARY_OUTLET, UrlSegment, NavigationExtras } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import focusTrap from 'focus-trap';
 
 @Component({
     exportAs: 'modal',
@@ -21,12 +22,13 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() isOpen: boolean;
     @Input() isNotification: boolean;
     @Input() settings: Partial<ModalOptions>;
-    @Output() onClose: EventEmitter<Event | undefined> = new EventEmitter();
-    @Output() onOpen: EventEmitter<Event | undefined> = new EventEmitter();
+    @Output() closemodal: EventEmitter<void> = new EventEmitter();
+    @Output() openmodal: EventEmitter<void> = new EventEmitter();
     options: ModalOptions;
     @ViewChild('body') private readonly body: ElementRef;
     @ContentChild(ModalHeaderComponent) private readonly header: ModalHeaderComponent;
     private closeSubscription: Subscription;
+    private focusTrap: ReturnType<typeof focusTrap>;
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
@@ -43,9 +45,9 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    close(event?: Event) {
+    close() {
         this.cleanUp();
-        this.onClose.emit(event);
+        this.closemodal.emit();
         this.isOpen = false;
         if (this.isRouteModal()) {
             if (this.options.routeOnClose) {
@@ -65,8 +67,8 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
     }
 
-    open(event?: Event) {
-        this.onOpen.emit(event);
+    open() {
+        this.openmodal.emit();
         this.isOpen = true;
         this.doOnOpen();
     }
@@ -76,14 +78,14 @@ export class ModalComponent implements OnDestroy, OnInit {
     }
 
     @HostListener('document:keydown', ['$event'])
-    keyDownHandler(e: KeyboardEvent) {
-        switch (e.key) { // eslint-disable-line @typescript-eslint/tslint/config
+    keyDownHandler(event: KeyboardEvent) {
+        if (!this.isOpen) {
+            return;
+        }
+        switch (event.key) {
             case 'Esc':
             case 'Escape':
-                this.close(e);
-                break;
-            case 'Tab':
-                this.onTabKeyDown(e);
+                this.close();
         }
     }
 
@@ -94,38 +96,18 @@ export class ModalComponent implements OnDestroy, OnInit {
         };
     }
 
-    private onTabKeyDown(e: KeyboardEvent) {
-        if (!this.isOpen) {
-            return;
-        }
-        let focusChanged = false;
-        const fm = createFocusManager(this.body.nativeElement, e.target as Node);
-        if (e.shiftKey) {
-            if (fm.isFocusOutside() || fm.isFocusInFirst()) {
-                focusChanged = fm.focusLast();
-            }
-        } else {
-            if (fm.isFocusOutside() || fm.isFocusInLast()) {
-                focusChanged = fm.focusFirst();
-                // focusChanged = true;
-            }
-        }
-        if (focusChanged) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-    }
-
     private doOnOpen() {
         if (this.header) {
-            this.closeSubscription = this.header.closeEventEmitter.subscribe((e: Event) => {
-                this.close(e);
+            this.closeSubscription = this.header.closeEventEmitter.subscribe(() => {
+                this.close();
             });
         }
         setTimeout(() => {
             const element = this.body.nativeElement;
             if (element && typeof element.focus === 'function') {
                 element.focus();
+                this.focusTrap = focusTrap(element);
+                this.focusTrap.activate();
             }
         });
         this.preventBackgroundScrolling();
@@ -137,6 +119,9 @@ export class ModalComponent implements OnDestroy, OnInit {
         }
         if (this.closeSubscription) {
             this.closeSubscription.unsubscribe();
+        }
+        if (this.focusTrap) {
+            this.focusTrap.deactivate();
         }
     }
 
@@ -183,7 +168,6 @@ export class ModalComponent implements OnDestroy, OnInit {
     private isAuxRoute() {
         let result = false;
         let route: ActivatedRoute = this.activatedRoute;
-        result = route.outlet !== PRIMARY_OUTLET;
         do {
             result = route.outlet !== PRIMARY_OUTLET;
             if (result) {

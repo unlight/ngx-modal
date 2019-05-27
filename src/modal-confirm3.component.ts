@@ -3,7 +3,7 @@ import { ModalConfirmComponent } from './modal-confirm.component';
 
 @Component({
     selector: 'modal-confirm3',
-    template: `<modal (onOpen)="onOpen()" (onClose)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
+    template: `<modal (closemodal)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
     <modal-header>
         <h2>{{ title }}</h2>
     </modal-header>

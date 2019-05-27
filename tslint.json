@@ -1,7 +1,7 @@
 {
   "extends": [
-    "codelyzer",
     "tslint:recommended",
+    "codelyzer",
     "tslint-clean-code",
     "tslint-microsoft-contrib",
     "tslint-sonarts"
@@ -155,6 +155,9 @@
     "no-increment-decrement": false,
     "no-unnecessary-bind": false,
     "prefer-type-cast": false,
+    "no-function-expression": false,
+    "no-http-string": false,
+    "no-parameter-reassignment": false,
     ".": false
   }
 }

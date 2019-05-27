@@ -3,13 +3,14 @@ import { OPTIONS, ModalOptions } from './modal-library';
 
 @Component({
     selector: 'modal-footer',
-    template: `<footer [class]="options.footerClass">
+    template: `<ng-container><footer [class]="options.footerClass">
         <ng-content></ng-content>
-    </footer>`,
+    </footer></ng-container>`,
 })
 export class ModalFooterComponent {
 
     constructor(
         @Inject(OPTIONS) public readonly options: ModalOptions,
     ) { }
+
 }
