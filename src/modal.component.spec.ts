@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/tslint/config */
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component, ViewChild, DebugElement } from '@angular/core';
 import { ModalComponent } from './modal.component';
 import { ModalModule } from './modal.module';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -92,7 +91,7 @@ describe('ModalComponent:', () => {
             component = fixture.componentInstance;
             fixture.detectChanges();
             const router: Router = TestBed.get(Router);
-            const navigate = spyOn(router, 'navigate');
+            spyOn(router, 'navigate');
             component.close();
 
             expect(router.navigate).toHaveBeenCalledWith(['.', { outlets: { modal: null } }], {});

@@ -1,11 +1,10 @@
 /* tslint:disable:no-import-side-effect */
-import { Component, ViewChild, Input, ElementRef, Inject, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, Input, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import { ModalComponent } from './modal.component';
 import { ModalOptions, OPTIONS } from './modal-library';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'modal-confirm',
