@@ -8,7 +8,7 @@ dev2() {
 
 build() {
     ng-packagr
-    mv src/${PACKAGE_NAME:-"ngx-modal2"}.metadata.json dist
+    mv src/*.metadata.json dist
     cp src/ngx-modal.css dist
 }
 

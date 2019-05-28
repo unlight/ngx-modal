@@ -16,7 +16,7 @@ import { ModalConfirmComponent } from './modal-confirm.component';
         <div [class]="options.confirmFooterToolbarClass">
             <ul [class]="options.confirmFooterButtonsClass">
                 <li [class]="options.confirmFooterButtonItemClass">
-                    <button role="cancel" type="button" [class]="options.confirmCancelButtonClass" (click)="cancel()" #confirmCancel data-dismiss="modal">{{ cancelLabel }}</button>
+                    <button role="cancel" type="button" [class]="options.confirmCancelButtonClass" (click)="cancel()" data-dismiss="modal">{{ cancelLabel }}</button>
                 </li>
                 <li [class]="options.confirmFooterButtonItemClass">
                     <button role="ok" type="button" [class]="options.confirmOkayButtonClass" (click)="ok()">{{ okayLabel }}</button>

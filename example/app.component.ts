@@ -49,10 +49,6 @@ export class AppComponent {
     confirmSubscription: Subscription;
     confirm2Subscription: Subscription;
 
-    constructor(
-    ) {
-    }
-
     openConfirm() {
         this.confirm.open();
         this.confirmSubscription = this.confirm.okay.subscribe(() => {

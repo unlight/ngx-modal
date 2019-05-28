@@ -29,4 +29,40 @@ describe('ModalConfirmComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('isOpen getter', () => {
+        fixture = TestBed.createComponent(ModalConfirmComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        expect(component.isOpen).toBeFalsy();
+        component.open();
+        expect(component.isOpen).toEqual(true);
+    });
+
+    it('ok should close modal', () => {
+        fixture = TestBed.createComponent(ModalConfirmComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        spyOn(component, 'close');
+        component.ok();
+        expect(component.close).toHaveBeenCalledWith();
+    });
+
+    it('cancel should close modal', () => {
+        fixture = TestBed.createComponent(ModalConfirmComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        spyOn(component, 'close');
+        component.cancel();
+        expect(component.close).toHaveBeenCalledWith();
+    });
+
+    it('okay should return true from result', done => {
+        fixture = TestBed.createComponent(ModalConfirmComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        component.okay.subscribe(done);
+        component.open();
+        component.ok();
+    });
+
 });
