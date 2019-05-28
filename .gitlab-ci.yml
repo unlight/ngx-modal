@@ -22,8 +22,8 @@ release:
     tags: ['docker', 'linux']
     script:
         - npm i
-        - npm i -g node-jq
-        - cat package.json | jq ".name = \"$PACKAGE_NAME\"" > package.json
+        - npm i node-jq --no-save --unsafe-perm=true
+        - cat package.json | node_modules/node-jq/bin/jq ".name = \"$PACKAGE_NAME\"" > package.json
         - npm run build
         - npm config set registry "http://nexus.ert.com/nexus/content/repositories/npm-automation"
         - npx semantic-release
