@@ -1,15 +1,14 @@
 /* tslint:disable:no-import-side-effect */
-import { Component, ViewChild, Input, ElementRef, Inject, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, Input, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import { ModalComponent } from './modal.component';
 import { ModalOptions, OPTIONS } from './modal-library';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'modal-confirm',
-    template: `<modal (onOpen)="onOpen()" (onClose)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
+    template: `<modal (closemodal)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
     <modal-header [title]="title" [hasCloseButton]="false">
         <ng-content select="[header]"></ng-content>
     </modal-header>
@@ -21,7 +20,7 @@ import { Observable } from 'rxjs/Observable';
             <button role="ok" type="button" [class]="options.confirmOkayButtonClass"
                 (click)="ok()">{{ okayLabel }}</button>
             <button role="cancel" type="button" [class]="options.confirmCancelButtonClass"
-                (click)="cancel()" #confirmCancel>{{ cancelLabel }}</button>
+                (click)="cancel()">{{ cancelLabel }}</button>
         </div>
     </modal-footer>
 </modal>`,
@@ -34,18 +33,20 @@ export class ModalConfirmComponent implements OnInit {
     @Input() okayLabel = 'Okay';
     @Input() cancelLabel = 'Cancel';
     @Input() settings: Partial<ModalOptions> = {};
-    @Output() onClose = new EventEmitter<void>();
+    @Output() closemodal = new EventEmitter<void>();
     options: ModalOptions;
-    readonly result: Subject<boolean> = new Subject<boolean>();
     @ViewChild(ModalComponent) private readonly modal: ModalComponent;
-    @ViewChild('confirmCancel') private readonly confirmCancel: ElementRef;
+    readonly result: Subject<boolean> = new Subject<boolean>();
+    readonly okay = this.result
+        .filter(value => value)
+        .take(1);
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
     ) { }
 
     ngOnInit() {
-        this.options = {...this.modalOptions, ...this.settings};
+        this.options = { ...this.modalOptions, ...this.settings };
     }
 
     open() {
@@ -57,12 +58,6 @@ export class ModalConfirmComponent implements OnInit {
 
     get isOpen() {
         return this.modal.isOpen;
-    }
-
-    get okay(): Observable<boolean> {
-        return this.result
-            .filter(value => value)
-            .take(1);
     }
 
     close() {
@@ -81,14 +76,7 @@ export class ModalConfirmComponent implements OnInit {
         this.close();
     }
 
-    onOpen() {
-        setTimeout(() => {
-            const element = this.confirmCancel.nativeElement;
-            element && element.focus && element.focus();
-        });
-    }
-
     onCloseModal() {
-        this.onClose.emit();
+        this.closemodal.emit();
     }
 }

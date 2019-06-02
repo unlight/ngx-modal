@@ -16,15 +16,14 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
+    "skipLibCheck": true,
     "lib": [
       "dom",
       "esnext"
     ]
   },
   "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/**/*.spec.ts"
+    "src/**/*.ts",
+    "example/**/*.ts"
   ]
 }
