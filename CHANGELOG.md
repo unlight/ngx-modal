@@ -1,3 +1,33 @@
+# [5.0.0](https://github.com/unlight/ngx-modal/compare/v4.7.2...v5.0.0) (2019-06-02)
+
+
+### Bug Fixes
+
+* Prevent keyboard handling when modal is not open ([863a266](https://github.com/unlight/ngx-modal/commit/863a266))
+
+
+### Features
+
+* Added external focus trap ([dca8487](https://github.com/unlight/ngx-modal/commit/dca8487))
+* Unwrap selectors modal-header, modal-content, modal-footer ([30e4808](https://github.com/unlight/ngx-modal/commit/30e4808))
+
+
+### Reverts
+
+* Reverted element unwrapping ([2c32c35](https://github.com/unlight/ngx-modal/commit/2c32c35))
+
+
+### Styles
+
+* Renamed events ([99571ff](https://github.com/unlight/ngx-modal/commit/99571ff))
+
+
+### BREAKING CHANGES
+
+* Removed event from `closemodal` and `openmodal` events
+* Renamed events according to Angular style guide: `onClose` to `closemodal`, `onOpen` to `openmodal` (https://angular.io/guide/styleguide#dont-prefix-output-properties)
+* Generated structure changed, removed Angular's wrap tag selectors
+
 # [5.0.0-beta.1](https://github.com/unlight/ngx-modal/compare/v4.7.2...v5.0.0-beta.1@beta) (2019-05-27)
 
 
