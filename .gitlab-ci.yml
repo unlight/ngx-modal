@@ -1,4 +1,4 @@
-image: ${CI_REGISTRY}/efs/docker/ci-nodechrome:10
+image: ${CI_REGISTRY}/efs/docker/ci-nodechrome:11
 
 stages:
     - test
@@ -19,9 +19,16 @@ release:
     stage: release
     tags: ['docker', 'linux']
     script:
+        - set -x
         - npm i
+        - npm i node-jq --no-save --unsafe-perm=true
+        - tmp_package=$(mktemp)
+        - cat package.json | node_modules/node-jq/bin/jq ".name = \"$CI_PROJECT_NAME\"" > $tmp_package
+        - cat $tmp_package > package.json
         - npm run build
+        - npm config set registry "http://nexus.ert.com/nexus/content/repositories/npm-automation"
         - npx semantic-release
     only:
         refs:
             - master
+            - beta

@@ -9,3 +9,4 @@
 /dist_*
 /.rts2_cache_*
 .ng_build
+/coverage

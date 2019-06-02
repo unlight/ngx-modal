@@ -27,7 +27,7 @@ require('../src/ngx-modal.css');
         cancelLabel="CANCEL"
         [isNotification]="true"
         [settings]="{bodyClass:'ngx-modal-body ngx-modal-body2'}"
-        (onClose)="confirmClose()"
+        (closemodal)="confirmClose()"
         content="Are you are sure?"></modal-confirm> <br/>
     modal-confirm2:
     <modal-confirm2 #confirm2
@@ -36,7 +36,7 @@ require('../src/ngx-modal.css');
         cancelLabel="CANCEL"
         [isNotification]="true"
         [settings]="{confirmOkayButtonClass: 'x-right', confirmCancelButtonClass: 'x-right'}"
-        (onClose)="confirm2Close()"
+        (closemodal)="confirm2Close()"
         content="Second confirm: Are you are sure?"></modal-confirm2> <br/>
 router-outlet name=modal: <router-outlet name="modal"></router-outlet> <br/>
 router-outlet name=lazy_modal: <router-outlet name="lazy_modal"></router-outlet>
@@ -49,10 +49,6 @@ export class AppComponent {
     confirmSubscription: Subscription;
     confirm2Subscription: Subscription;
 
-    constructor(
-    ) {
-    }
-
     openConfirm() {
         this.confirm.open();
         this.confirmSubscription = this.confirm.okay.subscribe(() => {
@@ -62,6 +58,7 @@ export class AppComponent {
 
     confirmClose() {
         this.confirmSubscription.unsubscribe();
+        console.log('confirmClose');
     }
 
     openConfirm2() {
@@ -73,5 +70,6 @@ export class AppComponent {
 
     confirm2Close() {
         this.confirm2Subscription.unsubscribe();
+        console.log('confirm2Close');
     }
 }

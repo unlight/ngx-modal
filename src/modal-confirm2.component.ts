@@ -3,7 +3,7 @@ import { ModalConfirmComponent } from './modal-confirm.component';
 
 @Component({
     selector: 'modal-confirm2',
-    template: `<modal (onOpen)="onOpen()" (onClose)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
+    template: `<modal (closemodal)="onCloseModal()" [routed]="false" [isNotification]="isNotification" [settings]="settings">
     <modal-header [title]="title" [hasCloseButton]="false">
         <ng-content select="[header]"></ng-content>
     </modal-header>
@@ -11,7 +11,7 @@ import { ModalConfirmComponent } from './modal-confirm.component';
         <p [innerHTML]="content"></p>
         <div [class]="options.confirmFooterToolbarClass">
             <div [class]="options.confirmFooterButtonsClass">
-                <button role="cancel" type="button" [class]="options.confirmCancelButtonClass" (click)="cancel()" #confirmCancel>{{ cancelLabel }}</button>
+                <button role="cancel" type="button" [class]="options.confirmCancelButtonClass" (click)="cancel()">{{ cancelLabel }}</button>
                 <button role="ok" type="button" [class]="options.confirmOkayButtonClass" (click)="ok()">{{ okayLabel }}</button>
             </div>
         </div>

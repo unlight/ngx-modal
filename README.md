@@ -3,7 +3,7 @@ Open modal window for your Angular X application
 
 ## INSTALL
 ```
-npm i -S ngx-modal2
+npm i -S <package-name>
 ```
 
 ## USAGE
@@ -49,7 +49,7 @@ export class GreetingsModalComponent {
 <modal-confirm #confirm 
     title="Confirmation" 
     content="Are you are sure?"
-    (onClose)="onCloseConfirm()"
+    (closemodal)="onCloseConfirm()"
 ></modal-confirm>
 <a (click)="openConfirm()">Confirm</a>
 ```
@@ -142,8 +142,8 @@ Inputs:
   supported settings: routeOnClose, routeOutlets, backOnClose, isOpenClass, isNotificationClass, popupOpenedClass
 
 Outputs:
-* `onClose: EventEmitter<any>`
-* `onOpen: EventEmitter<any>`
+* `closemodal: EventEmitter<void>`
+* `openmodal: EventEmitter<void>`
 
 Methods:
 * `open: void` Open modal
@@ -162,7 +162,7 @@ Inputs:
 * `cancelLabel: string = 'Cancel'`
 
 Outputs:
-* `onClose: EventEmitter<void>` 
+* `closemodal: EventEmitter<void>` 
 
 Properties:
 * `result`: readonly Subject<boolean>` Result of confirm
