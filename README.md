@@ -3,7 +3,7 @@ Open modal window for your Angular X application
 
 ## INSTALL
 ```
-npm i -S ngx-modal2
+npm i -S <package-name>
 ```
 
 ## USAGE
