@@ -1,3 +1,15 @@
+# [6.0.0](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/v5.0.0...v6.0.0) (2019-08-21)
+
+
+### Code Refactoring
+
+* Updated to Angular 8.X and rxjs 6.X ([4eef5e8](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/commit/4eef5e8))
+
+
+### BREAKING CHANGES
+
+* Updated to Angular 8.X and rxjs 6.X
+
 # [5.0.0](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/v4.8.1...v5.0.0) (2019-06-05)
 
 
