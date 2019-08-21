@@ -14,7 +14,7 @@ import { ModalComponent } from '../src/index';
 })
 export class ExampleModalComponent {
 
-    @ViewChild(ModalComponent) protected modal: ModalComponent;
+    @ViewChild(ModalComponent, { static: true }) protected modal: ModalComponent;
 
     constructor(
     ) { }

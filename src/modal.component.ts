@@ -1,10 +1,9 @@
 import { Input, Output, Component, ElementRef, EventEmitter, Inject, OnDestroy, ViewChild, Renderer2, ContentChild, OnInit, HostListener } from '@angular/core';
 import { OPTIONS, ModalOptions } from './modal-library';
 import { ModalHeaderComponent } from './modal-header.component';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, PRIMARY_OUTLET, UrlSegment, NavigationExtras } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import focusTrap from 'focus-trap';
 
 @Component({
@@ -25,8 +24,8 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Output() closemodal: EventEmitter<void> = new EventEmitter();
     @Output() openmodal: EventEmitter<void> = new EventEmitter();
     options: ModalOptions;
-    @ViewChild('body') private readonly body: ElementRef;
-    @ContentChild(ModalHeaderComponent) private readonly header: ModalHeaderComponent;
+    @ViewChild('body', { static: true }) private readonly body: ElementRef;
+    @ContentChild(ModalHeaderComponent, { static: true }) private readonly header: ModalHeaderComponent;
     private closeSubscription: Subscription;
     private focusTrap: ReturnType<typeof focusTrap>;
 

@@ -1,10 +1,9 @@
 /* tslint:disable:no-import-side-effect */
 import { Component, ViewChild, Input, Inject, OnInit, EventEmitter, Output } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/take';
+import { Subject } from 'rxjs';
 import { ModalComponent } from './modal.component';
 import { ModalOptions, OPTIONS } from './modal-library';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
     selector: 'modal-confirm',
@@ -35,11 +34,12 @@ export class ModalConfirmComponent implements OnInit {
     @Input() settings: Partial<ModalOptions> = {};
     @Output() closemodal = new EventEmitter<void>();
     options: ModalOptions;
-    @ViewChild(ModalComponent) private readonly modal: ModalComponent;
+    @ViewChild(ModalComponent, { static: true }) private readonly modal: ModalComponent;
     readonly result: Subject<boolean> = new Subject<boolean>();
-    readonly okay = this.result
-        .filter(value => value)
-        .take(1);
+    readonly okay = this.result.pipe(
+        filter(value => value),
+        take(1),
+    );
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,

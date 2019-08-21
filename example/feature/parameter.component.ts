@@ -18,7 +18,7 @@ import { ModalComponent } from '../../src/index';
 })
 export class ParameterComponent {
 
-    @ViewChild(ModalComponent) modal: ModalComponent;
+    @ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
     isOpen: boolean;
 
     open() {

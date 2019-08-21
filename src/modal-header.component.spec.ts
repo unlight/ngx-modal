@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalHeaderComponent } from './modal-header.component';
 import { ModalModule } from './modal.module';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 let component: ModalHeaderComponent;
 let fixture: ComponentFixture<ModalHeaderComponent>;
