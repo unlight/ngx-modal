@@ -51,7 +51,10 @@ export class ModalComponent implements OnDestroy, OnInit {
         if (this.isRouteModal()) {
             if (this.options.routeOnClose) {
                 if (this.isAuxRoute() && Array.isArray(this.options.routeOutlets)) {
-                    const outlets = this.options.routeOutlets.reduce((acc, outlet) => (acc[outlet] = null, acc), {} as { [x: string]: null });
+                    const outlets = this.options.routeOutlets.reduce((result, outlet) => {
+                        result[outlet] = null; // tslint:disable-line:no-null-keyword
+                        return result;
+                    }, {} as { [x: string]: null }); // tslint:disable-line:no-object-literal-type-assertion
                     const navigateOptions: NavigationExtras = {};
                     if (this.options.closeRelativeToParent) {
                         navigateOptions.relativeTo = this.activatedRoute.parent;
@@ -81,10 +84,8 @@ export class ModalComponent implements OnDestroy, OnInit {
         if (!this.isOpen) {
             return;
         }
-        switch (event.key) {
-            case 'Esc':
-            case 'Escape':
-                this.close();
+        if (event.key === 'Esc' || event.key === 'Escape') {
+            this.close();
         }
     }
 
