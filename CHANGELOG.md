@@ -1,3 +1,15 @@
+# [6.0.0](https://github.com/unlight/ngx-modal/compare/v5.0.0...v6.0.0) (2019-08-21)
+
+
+### Code Refactoring
+
+* Updated to Angular 8.X and rxjs 6.X ([5804081](https://github.com/unlight/ngx-modal/commit/5804081))
+
+
+### BREAKING CHANGES
+
+* Updated to Angular 8.X and rxjs 6.X
+
 # [5.0.0](https://github.com/unlight/ngx-modal/compare/v4.7.2...v5.0.0) (2019-06-02)
 
 
