@@ -11,7 +11,8 @@
     "node_modules/tslint/lib/rules",
     "node_modules/tslint-clean-code/dist/src",
     "node_modules/tslint-microsoft-contrib",
-    "node_modules/tslint-sonarts/lib/rules"
+    "node_modules/tslint-sonarts/lib/rules",
+    "node_modules/rxjs-tslint"
   ],
   "rules": {
     "no-output-on-prefix": true,
@@ -113,7 +114,6 @@
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -158,6 +158,10 @@
     "no-function-expression": false,
     "no-http-string": false,
     "no-parameter-reassignment": false,
+    "rxjs-collapse-imports": true,
+    "rxjs-pipeable-operators-only": true,
+    "rxjs-no-static-observable-methods": true,
+    "rxjs-proper-imports": true,
     ".": false
   }
 }

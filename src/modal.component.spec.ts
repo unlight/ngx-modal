@@ -53,7 +53,7 @@ describe('ModalComponent:', () => {
         const event = document.createEvent('KeyboardEvent');
         event.initKeyboardEvent('keydown', true, true, window, 'Tab', event.location, '', event.repeat, '');
         document.dispatchEvent(event);
-        expect(component.keyDownHandler).toHaveBeenCalled(); // eslint-disable-line jasmine/prefer-toHaveBeenCalledWith
+        expect(component.keyDownHandler).toHaveBeenCalled();
     });
 
     it('escape if modal is not visible should not call close', () => {
