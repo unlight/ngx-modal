@@ -41,12 +41,11 @@ export default (config: any) => {
     if (process.argv.indexOf('--coverage') !== -1) {
         webpackOptions.coverage = true;
         config.set({
-            reporters: ['progress', 'coverage', 'remap-coverage'],
-            coverageReporter: {
-                type: 'in-memory'
-            },
-            remapCoverageReporter: {
-                text: null,
+            reporters: ['progress', 'coverage-istanbul'],
+            coverageIstanbulReporter: {
+                reports: ['text'],
+                fixWebpackSourcePaths: true,
+                skipFilesWithNoCoverage: true,
             },
         });
     }
