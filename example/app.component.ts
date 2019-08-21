@@ -44,8 +44,8 @@ router-outlet name=lazy_modal: <router-outlet name="lazy_modal"></router-outlet>
 })
 export class AppComponent {
 
-    @ViewChild(ModalConfirmComponent) private confirm: ModalConfirmComponent;
-    @ViewChild(ModalConfirm2Component) private confirm2: ModalConfirm2Component;
+    @ViewChild(ModalConfirmComponent, { static: true }) private confirm: ModalConfirmComponent;
+    @ViewChild(ModalConfirm2Component, { static: true }) private confirm2: ModalConfirm2Component;
     confirmSubscription: Subscription;
     confirm2Subscription: Subscription;
 
