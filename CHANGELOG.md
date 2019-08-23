@@ -1,3 +1,10 @@
+## [6.0.1](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/v6.0.0...v6.0.1) (2019-08-23)
+
+
+### Bug Fixes
+
+* Fixed semver range ([1ea366c](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/commit/1ea366c))
+
 # [6.0.0](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/v5.0.0...v6.0.0) (2019-08-21)
 
 
