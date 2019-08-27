@@ -52,12 +52,8 @@ module.exports = {
                     "args": {
                         "arguments": false,
                     },
-                    "componentRef": {
-                        "componentReference": false,
-                    },
-                    "viewContainerRef": {
-                        "viewContainerReference": false,
-                    },
+                    "componentRef": false,
+                    "viewContainerReference": false,
                 }
             }
         ],
