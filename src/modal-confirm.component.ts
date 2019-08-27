@@ -26,15 +26,15 @@ import { filter, take } from 'rxjs/operators';
 })
 export class ModalConfirmComponent implements OnInit {
 
-    @Input() title: string;
-    @Input() content: string;
+    @Input() title: string = 'Confirmation';
+    @Input() content: string = 'Are you sure you want to do that?';
     @Input() isNotification: boolean;
     @Input() okayLabel = 'Okay';
     @Input() cancelLabel = 'Cancel';
     @Input() settings: Partial<ModalOptions> = {};
     @Output() closemodal = new EventEmitter<void>();
     options: ModalOptions;
-    @ViewChild(ModalComponent, { static: true }) private readonly modal: ModalComponent;
+    @ViewChild(ModalComponent, { static: true }) readonly modal: ModalComponent;
     readonly result: Subject<boolean> = new Subject<boolean>();
     readonly okay = this.result.pipe(
         filter(value => value),

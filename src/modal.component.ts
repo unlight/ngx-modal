@@ -23,9 +23,9 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() settings: Partial<ModalOptions>;
     @Output() closemodal: EventEmitter<void> = new EventEmitter();
     @Output() openmodal: EventEmitter<void> = new EventEmitter();
-    options: ModalOptions;
     @ViewChild('body', { static: true }) private readonly body: ElementRef;
     @ContentChild(ModalHeaderComponent, { static: true }) private readonly header: ModalHeaderComponent;
+    options: ModalOptions;
     private closeSubscription: Subscription;
     private focusTrap: ReturnType<typeof focusTrap>;
 
