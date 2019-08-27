@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ModalConfirmService {
 
     constructor(
-        private componentFactoryResolver: ComponentFactoryResolver,
+        private readonly componentFactoryResolver: ComponentFactoryResolver,
     ) { }
 
     open(viewContainerRef: ViewContainerRef, componentType: Type<ModalConfirmComponent>): Observable<boolean> {
@@ -18,6 +18,6 @@ export class ModalConfirmService {
         const componentRef = viewContainerRef.createComponent(componentFactory);
         componentRef.instance.markForOpen();
         return componentRef.instance.result
-            .pipe(finalize(() => componentRef.destroy()))
+            .pipe(finalize(() => componentRef.destroy())); // tslint:disable-line:no-void-expression
     }
 }
