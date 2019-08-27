@@ -1,6 +1,6 @@
 /* tslint:disable:no-import-side-effect */
-import { Component, ViewChild, Input, Inject, OnInit, EventEmitter, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, ViewChild, Input, Inject, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { ModalComponent } from './modal.component';
 import { ModalOptions, OPTIONS } from './modal-library';
 import { filter, take } from 'rxjs/operators';
@@ -24,7 +24,7 @@ import { filter, take } from 'rxjs/operators';
     </modal-footer>
 </modal>`,
 })
-export class ModalConfirmComponent implements OnInit {
+export class ModalConfirmComponent implements OnInit, OnDestroy {
 
     @Input() title: string = 'Confirmation';
     @Input() content: string = 'Are you sure you want to do that?';
@@ -34,12 +34,13 @@ export class ModalConfirmComponent implements OnInit {
     @Input() settings: Partial<ModalOptions> = {};
     @Output() closemodal = new EventEmitter<void>();
     options: ModalOptions;
-    @ViewChild(ModalComponent, { static: true }) readonly modal: ModalComponent;
+    @ViewChild(ModalComponent, { static: true }) private readonly modal: ModalComponent;
     readonly result: Subject<boolean> = new Subject<boolean>();
     readonly okay = this.result.pipe(
         filter(value => value),
         take(1),
     );
+    private subscription: Subscription;
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
@@ -47,23 +48,31 @@ export class ModalConfirmComponent implements OnInit {
 
     ngOnInit() {
         this.options = { ...this.modalOptions, ...this.settings };
+        this.subscription = this.modal.cancelmodal
+            .subscribe(() => {
+                this.result.next(false);
+            });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     open() {
         this.result.next(false);
-        if (this.modal) {
-            this.modal.open();
-        }
+        this.modal.open();
     }
 
     get isOpen() {
         return this.modal.isOpen;
     }
 
+    markForOpen() {
+        this.modal.isOpen = true;
+    }
+
     close() {
-        if (this.modal) {
-            this.modal.close();
-        }
+        this.modal.close();
     }
 
     ok() {

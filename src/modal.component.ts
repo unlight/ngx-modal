@@ -23,6 +23,7 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() settings: Partial<ModalOptions>;
     @Output() closemodal: EventEmitter<void> = new EventEmitter();
     @Output() openmodal: EventEmitter<void> = new EventEmitter();
+    @Output() cancelmodal: EventEmitter<void> = new EventEmitter();
     @ViewChild('body', { static: true }) private readonly body: ElementRef;
     @ContentChild(ModalHeaderComponent, { static: true }) private readonly header: ModalHeaderComponent;
     options: ModalOptions;
@@ -85,6 +86,7 @@ export class ModalComponent implements OnDestroy, OnInit {
             return;
         }
         if (event.key === 'Esc' || event.key === 'Escape') {
+            this.cancelmodal.emit();
             this.close();
         }
     }
@@ -98,9 +100,11 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     private doOnOpen() {
         if (this.header) {
-            this.closeSubscription = this.header.closeEventEmitter.subscribe(() => {
-                this.close();
-            });
+            this.closeSubscription = this.header.closeEventEmitter
+                .subscribe(() => {
+                    this.cancelmodal.emit();
+                    this.close();
+                });
         }
         setTimeout(() => {
             const element: HTMLElement | undefined = this.body.nativeElement;

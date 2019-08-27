@@ -16,7 +16,7 @@ export class ModalConfirmService {
     open(viewContainerRef: ViewContainerRef, componentType: Type<ModalConfirmComponent>): Observable<boolean> {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
         const componentRef = viewContainerRef.createComponent(componentFactory);
-        componentRef.instance.modal.isOpen = true;
+        componentRef.instance.markForOpen();
         return componentRef.instance.result
             .pipe(finalize(() => componentRef.destroy()))
     }

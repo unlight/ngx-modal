@@ -73,7 +73,7 @@ export class AppComponent {
             [ModalConfirmComponent, 1],
             [ModalConfirm2Component, 2],
             [ModalConfirm3Component, 3],
-        ].find(([, num]) => type === num);
+        ].find(([, num]) => type === num)!;
 
         this.modalConfirmService.open(this.viewContainerRef, <any>componentType)
             .pipe(take(1))

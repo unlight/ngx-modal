@@ -65,4 +65,7 @@ describe('ModalConfirmComponent', () => {
         component.ok();
     });
 
+    it('emit false on close button');
+    it('escape should emit false');
+
 });
