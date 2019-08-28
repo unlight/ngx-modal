@@ -1,3 +1,11 @@
+# [6.1.0](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/v6.0.1...v6.1.0) (2019-08-28)
+
+
+### Features
+
+* Allow to set id attribute for close button ([fa675e4](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/commit/fa675e4))
+* Modal confirmation service ([57f89e6](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/commit/57f89e6))
+
 ## [6.0.1](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/v6.0.0...v6.0.1) (2019-08-23)
 
 
