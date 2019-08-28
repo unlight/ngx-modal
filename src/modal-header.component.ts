@@ -16,7 +16,7 @@ export class ModalHeaderComponent {
 
     @Input() public title: string;
     @Input() public hasCloseButton: boolean;
-    public closeEventEmitter: EventEmitter<Event> = new EventEmitter();
+    public readonly closeEventEmitter: EventEmitter<Event> = new EventEmitter();
 
     constructor(
         @Inject(OPTIONS) public readonly options: ModalOptions,

@@ -1,3 +1,4 @@
+export { ModalConfirmService } from './modal-confirm.service';
 export { ModalComponent } from './modal.component';
 export { ModalContentComponent } from './modal-content.component';
 export { ModalFooterComponent } from './modal-footer.component';

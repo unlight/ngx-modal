@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/tslint/config */
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { ModalModule } from './modal.module';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ModalConfirmService } from './modal-confirm.service';
+import { ModalConfirmComponent } from './modal-confirm.component';
+import { tap, take } from 'rxjs/operators';
+import { By } from '@angular/platform-browser';
 
 describe('Component usage', () => {
 
@@ -18,7 +22,11 @@ describe('Component usage', () => {
         </modal>
         `,
     })
-    class TestComponent { }
+    class TestComponent {
+        constructor(
+            public viewContainerRef: ViewContainerRef,
+        ) { }
+    }
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -36,4 +44,20 @@ describe('Component usage', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
     });
+
+    it('modal confirmation service component should destroyed', async(() => {
+        const service: ModalConfirmService = TestBed.get(ModalConfirmService);
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        // const viewContainerRef = fixture.debugElement.injector.get(ViewContainerRef);
+        const viewContainerRef = component.viewContainerRef;
+        const observable = service.open(viewContainerRef, ModalConfirmComponent);
+        fixture.detectChanges();
+        observable
+            .pipe(take(1))
+            .subscribe();
+        const button = document.querySelector<HTMLButtonElement>('modal-confirm button[role=cancel]');
+        button!.click();
+        expect(document.querySelector('modal-confirm')).toBeNull();
+    }));
 });

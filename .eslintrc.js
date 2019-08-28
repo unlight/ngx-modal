@@ -43,6 +43,20 @@ module.exports = {
         // unicorn
         "unicorn/import-index": 0,
         "unicorn/catch-error-name": 0,
+        "unicorn/prevent-abbreviations": [1,
+            {
+                "replacements": {
+                    "err": {
+                        "error": false,
+                    },
+                    "args": {
+                        "arguments": false,
+                    },
+                    "componentRef": false,
+                    "viewContainerReference": false,
+                }
+            }
+        ],
         // import
         "import/newline-after-import": 0,
         "import/no-duplicates": 1,

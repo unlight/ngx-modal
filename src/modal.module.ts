@@ -8,6 +8,7 @@ import { ModalOptions, defaultOptions, OPTIONS } from './modal-library';
 import { ModalConfirmComponent } from './modal-confirm.component';
 import { ModalConfirm2Component } from './modal-confirm2.component';
 import { ModalConfirm3Component } from './modal-confirm3.component';
+import { ModalConfirmService } from './modal-confirm.service'; // eslint-disable-line import/max-dependencies
 
 @NgModule({
     imports: [
@@ -35,7 +36,13 @@ import { ModalConfirm3Component } from './modal-confirm3.component';
         { provide: 'MODAL_OPTIONS_DEFAULT', useValue: defaultOptions },
         { provide: 'MODAL_OPTIONS_ROOT', useValue: defaultOptions },
         { provide: OPTIONS, useValue: defaultOptions },
+        { provide: ModalConfirmService, useClass: ModalConfirmService },
     ],
+    entryComponents: [
+        ModalConfirmComponent,
+        ModalConfirm2Component,
+        ModalConfirm3Component,
+    ]
 })
 export class ModalModule {
 
