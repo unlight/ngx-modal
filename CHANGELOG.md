@@ -1,3 +1,10 @@
+# [6.2.0](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/v6.1.0...v6.2.0) (2019-08-28)
+
+
+### Features
+
+* Allow custom options for modal confirm service ([a212f5a](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/commit/a212f5a))
+
 # [6.1.0](https://gitcloud.ert.com/efs/etm/ert-ngx-modal2/compare/v6.0.1...v6.1.0) (2019-08-28)
 
 
