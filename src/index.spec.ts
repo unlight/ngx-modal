@@ -5,8 +5,7 @@ import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ModalConfirmService } from './modal-confirm.service';
 import { ModalConfirmComponent } from './modal-confirm.component';
-import { tap, take } from 'rxjs/operators';
-import { By } from '@angular/platform-browser';
+import { take } from 'rxjs/operators';
 
 describe('Component usage', () => {
 

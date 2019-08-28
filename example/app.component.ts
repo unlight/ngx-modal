@@ -1,4 +1,4 @@
-import { Component, ViewChild, ComponentFactoryResolver, TemplateRef, Directive, ElementRef, ViewChildren, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ModalConfirmService, ModalConfirmComponent, ModalConfirm2Component, ModalConfirm3Component } from '../src';
 import { take } from 'rxjs/operators';
