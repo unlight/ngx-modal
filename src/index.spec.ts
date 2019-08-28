@@ -59,4 +59,26 @@ describe('Component usage', () => {
         button!.click();
         expect(document.querySelector('modal-confirm')).toBeNull();
     }));
+
+    it('possible to pass content and title to modal service', () => {
+        const service: ModalConfirmService = TestBed.get(ModalConfirmService);
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        const viewContainerRef = component.viewContainerRef;
+        const observable = service.open(viewContainerRef, ModalConfirmComponent, {
+            title: 'Really?',
+            content: 'RocketLauncher',
+            okayLabel: 'Yes',
+            cancelLabel: 'No',
+        });
+        fixture.detectChanges();
+        const modalConfirm = document.querySelector('modal-confirm');
+        expect(modalConfirm!.querySelector('modal-header')!.textContent).toEqual('Really?');
+        expect(modalConfirm!.querySelector('modal-content')!.textContent).toEqual('RocketLauncher');
+        expect(modalConfirm!.querySelector('[role=ok]')!.textContent).toEqual('Yes');
+        expect(modalConfirm!.querySelector('[role=cancel]')!.textContent).toEqual('No');
+        observable.subscribe();
+        (<any>observable).complete();
+        expect(document.querySelector('modal-confirm')).toBeNull();
+    });
 });

@@ -13,11 +13,19 @@ export class ModalConfirmService {
         private readonly componentFactoryResolver: ComponentFactoryResolver,
     ) { }
 
-    open(viewContainerRef: ViewContainerRef, componentType: Type<ModalConfirmComponent>): Observable<boolean> {
+    open<T extends ModalConfirmComponent = ModalConfirmComponent>(viewContainerRef: ViewContainerRef, componentType: Type<T>, settings?: Omit<Partial<T>, 'markForOpen'>): Observable<boolean> {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
         const componentRef = viewContainerRef.createComponent(componentFactory);
+        if (settings) {
+            Object.keys(settings)
+                .forEach(property => {
+                    (<any>componentRef).instance[property] = (<any>settings)[property];
+                });
+        }
         componentRef.instance.markForOpen();
         return componentRef.instance.result
-            .pipe(finalize(() => componentRef.destroy())); // tslint:disable-line:no-void-expression
+            .pipe(finalize(() => {
+                componentRef.destroy(); // tslint:disable-line:no-void-expression
+            }));
     }
 }

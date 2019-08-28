@@ -29,6 +29,7 @@ export class ModalComponent implements OnDestroy, OnInit {
     options: ModalOptions;
     private closeSubscription: Subscription;
     private focusTrap: ReturnType<typeof focusTrap>;
+    private openTimer: number;
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
@@ -106,7 +107,7 @@ export class ModalComponent implements OnDestroy, OnInit {
                     this.close();
                 });
         }
-        setTimeout(() => {
+        this.openTimer = setTimeout(() => {
             if (!this.isOpen) {
                 return;
             }
@@ -121,6 +122,7 @@ export class ModalComponent implements OnDestroy, OnInit {
     }
 
     private cleanUp() {
+        clearTimeout(this.openTimer);
         if (this.isOpen) {
             this.enableBackgroundScrolling();
         }

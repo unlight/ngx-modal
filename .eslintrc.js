@@ -45,6 +45,11 @@ module.exports = {
         "unicorn/catch-error-name": 0,
         "unicorn/prevent-abbreviations": [1,
             {
+                "whitelist": {
+                    "getInitialProps": true,
+                    "componentRef": true,
+                    "viewContainerRef": true,
+                },
                 "replacements": {
                     "err": {
                         "error": false,
@@ -52,8 +57,6 @@ module.exports = {
                     "args": {
                         "arguments": false,
                     },
-                    "componentRef": false,
-                    "viewContainerReference": false,
                 }
             }
         ],
