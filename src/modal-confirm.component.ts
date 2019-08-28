@@ -1,4 +1,3 @@
-/* tslint:disable:no-import-side-effect */
 import { Component, ViewChild, Input, Inject, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { ModalComponent } from './modal.component';

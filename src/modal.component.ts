@@ -107,6 +107,9 @@ export class ModalComponent implements OnDestroy, OnInit {
                 });
         }
         setTimeout(() => {
+            if (!this.isOpen) {
+                return;
+            }
             const element: HTMLElement | undefined = this.body.nativeElement;
             if (element && typeof element.focus === 'function') {
                 element.focus();

@@ -3,6 +3,8 @@ import { ModalConfirmComponent } from './modal-confirm.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ModalModule } from './modal.module';
+import { ModalConfirm3Component } from './modal-confirm3.component';
+import { By } from '@angular/platform-browser';
 
 describe('ModalConfirmComponent', () => {
 
@@ -65,7 +67,29 @@ describe('ModalConfirmComponent', () => {
         component.ok();
     });
 
-    it('emit false on close button');
-    it('escape should emit false');
+    it('emit false on close button', (done) => {
+        fixture = TestBed.createComponent(ModalConfirm3Component);
+        component = fixture.componentInstance;
+        component.markForOpen();
+        fixture.detectChanges();
+        const element = fixture.debugElement.query(By.css('modal-header [data-dismiss="modal"]'));
+        component.result.subscribe(result => {
+            expect(result).toEqual(false);
+            done();
+        });
+        element.triggerEventHandler('click', null);
+    });
+
+    it('escape should emit false', (done) => {
+        fixture = TestBed.createComponent(ModalConfirmComponent);
+        component = fixture.componentInstance;
+        component.markForOpen();
+        fixture.detectChanges();
+        component.result.subscribe(result => {
+            expect(result).toEqual(false);
+            done();
+        });
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    });
 
 });

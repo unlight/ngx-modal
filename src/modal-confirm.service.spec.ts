@@ -1,1 +1,0 @@
-it('component destroyed');
