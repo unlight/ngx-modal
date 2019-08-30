@@ -1,3 +1,27 @@
+# [7.0.0](https://github.com/unlight/ngx-modal/compare/v6.0.0...v7.0.0) (2019-08-30)
+
+
+### Bug Fixes
+
+* Fixed semver range ([1ea366c](https://github.com/unlight/ngx-modal/commit/1ea366c))
+
+
+### Code Refactoring
+
+* Updated to Angular 8.X and rxjs 6.X ([4eef5e8](https://github.com/unlight/ngx-modal/commit/4eef5e8))
+
+
+### Features
+
+* Allow custom options for modal confirm service ([a212f5a](https://github.com/unlight/ngx-modal/commit/a212f5a))
+* Allow to set id attribute for close button ([fa675e4](https://github.com/unlight/ngx-modal/commit/fa675e4))
+* Modal confirmation service ([57f89e6](https://github.com/unlight/ngx-modal/commit/57f89e6))
+
+
+### BREAKING CHANGES
+
+* Updated to Angular 8.X and rxjs 6.X
+
 # [6.0.0](https://github.com/unlight/ngx-modal/compare/v5.0.0...v6.0.0) (2019-08-21)
 
 
