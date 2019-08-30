@@ -100,10 +100,7 @@
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-inferrable-types": false,
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
@@ -162,6 +159,7 @@
     "rxjs-pipeable-operators-only": true,
     "rxjs-no-static-observable-methods": true,
     "rxjs-proper-imports": true,
+    "linebreak-style": false,
     ".": false
   }
 }

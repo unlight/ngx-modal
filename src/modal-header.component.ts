@@ -7,16 +7,19 @@ import { ModalOptions, OPTIONS } from './modal-library';
         <button *ngIf="hasCloseButton" type="button" (click)="closeEventEmitter.next($event)"
             data-dismiss="modal"
             [class]="options.buttonCloseClass"
-            [innerHTML]="options.buttonCloseContent"></button>
+            [innerHTML]="options.buttonCloseContent"
+            [attr.id]="closeButtonId"
+        ></button>
         <h1 *ngIf="title">{{ title }}</h1>
         <ng-content></ng-content>
     </header>`,
 })
 export class ModalHeaderComponent {
 
-    @Input() public title: string;
-    @Input() public hasCloseButton: boolean;
-    public closeEventEmitter: EventEmitter<Event> = new EventEmitter();
+    @Input() title: string;
+    @Input() hasCloseButton: boolean;
+    @Input() closeButtonId: string;
+    closeEventEmitter: EventEmitter<Event> = new EventEmitter();
 
     constructor(
         @Inject(OPTIONS) public readonly options: ModalOptions,

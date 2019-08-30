@@ -23,11 +23,13 @@ export class ModalComponent implements OnDestroy, OnInit {
     @Input() settings: Partial<ModalOptions>;
     @Output() closemodal: EventEmitter<void> = new EventEmitter();
     @Output() openmodal: EventEmitter<void> = new EventEmitter();
-    options: ModalOptions;
+    @Output() cancelmodal: EventEmitter<void> = new EventEmitter();
     @ViewChild('body', { static: true }) private readonly body: ElementRef;
     @ContentChild(ModalHeaderComponent, { static: true }) private readonly header: ModalHeaderComponent;
+    options: ModalOptions;
     private closeSubscription: Subscription;
     private focusTrap: ReturnType<typeof focusTrap>;
+    private openTimer: number;
 
     constructor(
         @Inject(OPTIONS) private readonly modalOptions: ModalOptions,
@@ -85,6 +87,7 @@ export class ModalComponent implements OnDestroy, OnInit {
             return;
         }
         if (event.key === 'Esc' || event.key === 'Escape') {
+            this.cancelmodal.emit();
             this.close();
         }
     }
@@ -98,11 +101,16 @@ export class ModalComponent implements OnDestroy, OnInit {
 
     private doOnOpen() {
         if (this.header) {
-            this.closeSubscription = this.header.closeEventEmitter.subscribe(() => {
-                this.close();
-            });
+            this.closeSubscription = this.header.closeEventEmitter
+                .subscribe(() => {
+                    this.cancelmodal.emit();
+                    this.close();
+                });
         }
-        setTimeout(() => {
+        this.openTimer = setTimeout(() => {
+            if (!this.isOpen) {
+                return;
+            }
             const element: HTMLElement | undefined = this.body.nativeElement;
             if (element && typeof element.focus === 'function') {
                 element.focus();
@@ -114,6 +122,7 @@ export class ModalComponent implements OnDestroy, OnInit {
     }
 
     private cleanUp() {
+        clearTimeout(this.openTimer);
         if (this.isOpen) {
             this.enableBackgroundScrolling();
         }

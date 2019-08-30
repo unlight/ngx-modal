@@ -24,6 +24,7 @@
     margin: 25vh 25vw 1em;
     border: 1px solid #aaa;
     border-radius: 3px;
+    background: #fff;
 }
 
 .ngx-modal-header {

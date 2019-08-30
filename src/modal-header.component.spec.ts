@@ -59,4 +59,14 @@ describe('ModalHeaderComponent', () => {
         button.click();
     });
 
+    it('is possible to pass id attribute to modal button close', () => {
+        fixture = TestBed.createComponent(ModalHeaderComponent);
+        component = fixture.componentInstance;
+        component.hasCloseButton = true;
+        component.closeButtonId = 'buttonId';
+        fixture.detectChanges();
+        button = fixture.nativeElement.querySelector('[data-dismiss="modal"]');
+        expect(button.id).toEqual('buttonId');
+    });
+
 });

@@ -3,7 +3,7 @@ Open modal window for your Angular X application
 
 ## INSTALL
 ```
-npm i -S ngx-modal2
+npm i -S <package-name>
 ```
 
 ## USAGE
@@ -205,6 +205,7 @@ Selector: `modal-header`
 Inputs:
 * `title: string`
 * `hasCloseButton: boolean`
+* `closeButtonId: string`
 
 Properties:
 * `closeEventEmitter: EventEmitter<any>`
@@ -217,6 +218,32 @@ Selector: `modal-footer`
 
 Selector: `modal-content`
 
+#### ModalConfirmService
+Create modal confirm popup dynamically.
+
+Methods:
+* `open(viewContainerRef: ViewContainerRef, componentType: Type<ModalConfirmComponent>, settings?: Partial<ModalConfirmComponent>): Observable<boolean>`
+
+Example usage:
+```js
+export class AppComponent {
+
+    constructor(
+        private modalConfirmService: ModalConfirmService,
+        private viewContainerRef: ViewContainerRef,
+    ) { }
+
+    openModalConfirmService() {
+        this.modalConfirmService.open(this.viewContainerRef, ModalConfirmComponent)
+            .pipe(take(1))
+            .subscribe(result => {
+                // true - ok, false - cancel
+                console.log('confirm result', result);
+            });
+    }
+}
+```
+**Note:** You MUST subscribe to observable, otherwise modal will not be closed.
 
 ## DEVELOPMENT
 * `npm run dev`
